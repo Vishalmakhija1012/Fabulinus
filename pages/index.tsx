@@ -217,23 +217,30 @@ export default function Home() {
 
   // Desktop-only hero image: only render after mount if desktop
   const [showHeroImage, setShowHeroImage] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   useEffect(() => {
+    if (!mounted) return;
     if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const checkDesktop = () => setShowHeroImage(window.innerWidth >= 768);
     checkDesktop();
     window.addEventListener('resize', checkDesktop);
     return () => window.removeEventListener('resize', checkDesktop);
-  }, []);
+  }, [mounted]);
 
   const [isMobileGREAT, setIsMobileGREAT] = useState(false);
   useEffect(() => {
+    if (!mounted) return;
     if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const check = () => setIsMobileGREAT(window.innerWidth < 640);
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
-  }, []);
-
+  }, [mounted]);
+  if (!mounted) {
+    // Render a neutral fallback to avoid hydration mismatch
+    return <main className="w-full min-h-screen flex flex-col bg-[#fafafa] overflow-x-hidden" />;
+  }
   return (
     <main className="w-full min-h-screen flex flex-col bg-[#fafafa] overflow-x-hidden">
       {/* Add padding to main content to account for fixed header */}

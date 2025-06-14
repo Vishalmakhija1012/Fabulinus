@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 const personas = [
 	{
@@ -35,7 +38,18 @@ const personas = [
 export default function PersonaSelection() {
 	const router = useRouter();
 
-	const handleSelect = (personaKey: string) => {
+	const handleSelect = async (personaKey: string) => {
+		let journeyId = localStorage.getItem('journeyId');
+		if (!journeyId) {
+			journeyId = uuidv4();
+			localStorage.setItem('journeyId', journeyId);
+		}
+		// Save persona selection to Firestore
+		await addDoc(collection(db, 'personaSelections'), {
+			journeyId,
+			persona: personaKey,
+			createdAt: serverTimestamp(),
+		});
 		if (typeof window !== 'undefined') {
 			localStorage.setItem('personaType', personaKey);
 		}

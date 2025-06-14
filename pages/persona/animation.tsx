@@ -1,3 +1,5 @@
+import { db } from '../../firebase';
+import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -7,9 +9,50 @@ const highlight = (text: string) => (
 
 export default function Animation() {
   const router = useRouter();
-  const { experience, goal, englishLevel, typeOfCourse } = router.query;
   const [show, setShow] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
+  const [persona, setPersona] = useState<string | null>(null);
+  const [formData, setFormData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch Firestore data on mount
+  useEffect(() => {
+    const fetchData = async () => {
+      const journeyId = typeof window !== 'undefined' ? localStorage.getItem('journeyId') : null;
+      if (!journeyId) {
+        setLoading(false);
+        return;
+      }
+      // Fetch persona selection
+      const personaQ = query(
+        collection(db, 'personaSelections'),
+        where('journeyId', '==', journeyId),
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      );
+      const personaSnap = await getDocs(personaQ);
+      let personaType = null;
+      personaSnap.forEach(doc => {
+        personaType = doc.data().persona;
+      });
+      setPersona(personaType);
+      // Fetch latest persona form
+      const formQ = query(
+        collection(db, 'personaForms'),
+        where('journeyId', '==', journeyId),
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      );
+      const formSnap = await getDocs(formQ);
+      let form = null;
+      formSnap.forEach(doc => {
+        form = doc.data().formData;
+      });
+      setFormData(form);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
 
   // Animation: reveal after short delay, then show logo, then redirect
   useEffect(() => {
@@ -45,10 +88,13 @@ export default function Animation() {
     }
   }, []);
 
-  // Compose summary sentence
-  const allAnswers = Object.entries(router.query)
-    .filter(([key, value]) => value && key !== 'undefined')
-    .map(([key, value]) => highlight(value.toString().replace(/-/g, ' ')));
+  // Compose summary sentence from Firestore data
+  let allAnswers = [];
+  if (formData) {
+    allAnswers = Object.entries(formData)
+      .filter(([key, value]) => value && key !== 'undefined')
+      .map(([key, value]) => highlight(value.toString().replace(/-/g, ' ')));
+  }
 
   const summary = (
     <>
@@ -56,6 +102,9 @@ export default function Animation() {
         <span>Let me find the best course for you for</span>
       </div>
       <div className="flex flex-wrap justify-center items-center gap-2 mt-3">
+        {persona && (
+          <span className="px-2 py-0.5 rounded-lg bg-[#ffe066] text-[#ef5a63] font-bold mx-1 animate-pulse">{persona.replace(/_/g, ' ')}</span>
+        )}
         {allAnswers}
       </div>
     </>
@@ -100,7 +149,9 @@ export default function Animation() {
             ))}
           </div>
         </div>
-        {!showLogo ? (
+        {loading ? (
+          <div className="text-lg text-[#ef5a63] font-semibold text-center animate-fade-in-up">Loading your journey...</div>
+        ) : !showLogo ? (
           <>
             <h2 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-6 text-center animate-fade-in-up">Analyzing your answers...</h2>
             {show && (

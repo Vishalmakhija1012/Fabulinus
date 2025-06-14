@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function ProfessionalForm() {
   const router = useRouter();
@@ -14,9 +16,16 @@ export default function ProfessionalForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Pass answers as query params to the animation page
+    const journeyId = localStorage.getItem('journeyId');
+    const persona = localStorage.getItem('personaType') || 'professional';
+    await addDoc(collection(db, 'personaForms'), {
+      journeyId,
+      persona,
+      formData: form,
+      createdAt: serverTimestamp(),
+    });
     router.push({
       pathname: '/persona/animation',
       query: {

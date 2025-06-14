@@ -1,35 +1,84 @@
+import { db } from '../../firebase';
+import { collection, query as firestoreQuery, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { COURSE_LOGIC } from '../../components/courseLogic';
 import React, { useState } from 'react';
 import Image from 'next/image';
 
 export default function SinglePage() {
+  const [loading, setLoading] = React.useState(true);
+  const [persona, setPersona] = React.useState('');
+  const [typeOfCourse, setTypeOfCourse] = React.useState('');
+  const [course, setCourse] = React.useState<any>(null);
   const router = useRouter();
-  // Get query params from the URL
-  const query = router.query;
 
-  // Determine persona type and type of course
-  // Parent form: preferredTime is typeOfCourse
-  // Others: typeOfCourse is typeOfCourse
-  let persona = '';
-  let typeOfCourse = '';
-  if (query.childAge !== undefined) {
-    persona = 'Parents';
-    typeOfCourse = query.preferredTime === 'short-term' ? 'Short Term' : 'Long Term';
-  } else {
-    persona = 'Others';
-    typeOfCourse = query.typeOfCourse === 'short-term' ? 'Short Term' : 'Long Term';
-  }
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const journeyId = typeof window !== 'undefined' ? localStorage.getItem('journeyId') : null;
+      if (!journeyId) {
+        setLoading(false);
+        return;
+      }
+      // Fetch persona selection
+      const personaQ = firestoreQuery(
+        collection(db, 'personaSelections'),
+        where('journeyId', '==', journeyId),
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      );
+      const personaSnap = await getDocs(personaQ);
+      let personaType = '';
+      personaSnap.forEach(doc => {
+        personaType = doc.data().persona;
+      });
+      // Fetch latest persona form
+      const formQ = firestoreQuery(
+        collection(db, 'personaForms'),
+        where('journeyId', '==', journeyId),
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      );
+      const formSnap = await getDocs(formQ);
+      let form = null;
+      formSnap.forEach(doc => {
+        form = doc.data().formData;
+      });
+      // Determine persona and typeOfCourse for course logic
+      let personaLabel = '';
+      let courseType = '';
+      if (personaType === 'parent') {
+        personaLabel = 'Parents';
+        // Parent form: preferredTime is typeOfCourse
+        courseType = form?.preferredTime === 'short-term' ? 'Short Term' : 'Long Term';
+      } else {
+        personaLabel = 'Others';
+        // Others: typeOfCourse is typeOfCourse
+        courseType = form?.typeOfCourse === 'short-term' ? 'Short Term' : 'Long Term';
+      }
+      setPersona(personaLabel);
+      setTypeOfCourse(courseType);
+      // Find the course in COURSE_LOGIC
+      let foundCourse = null;
+      if (personaLabel === 'Parents') {
+        foundCourse = COURSE_LOGIC.find(
+          c => c.targetAudience === 'Parents' && c.courseType === courseType
+        );
+      } else {
+        foundCourse = COURSE_LOGIC.find(
+          c => c.targetAudience === 'Others' && c.courseType === courseType
+        );
+      }
+      setCourse(foundCourse);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
 
-  // Find the course in COURSE_LOGIC
-  let course = null;
-  if (persona === 'Parents') {
-    course = COURSE_LOGIC.find(
-      c => c.targetAudience === 'Parents' && c.courseType === typeOfCourse
-    );
-  } else {
-    course = COURSE_LOGIC.find(
-      c => c.targetAudience === 'Others' && c.courseType === typeOfCourse
+  if (loading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center px-2 font-sans bg-white rounded-[2.5rem] shadow-lg">
+        <div className="text-center text-xl text-[#ef5a63] font-bold">Loading your course...</div>
+      </main>
     );
   }
 

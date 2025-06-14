@@ -78,7 +78,7 @@ export default function PersonaDetail() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-xl w-full flex flex-col items-center" style={{ marginTop: '-15px' }}>
-        <h1 className="text-3xl sm:text-4xl font-bold mb-8" style={{ color: '#ef5a63', fontWeight: 700, fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.1, WebkitTextStroke: '0px', textShadow: 'none', textRendering: 'optimizeLegibility', MozOsxFontSmoothing: 'grayscale', WebkitFontSmoothing: 'antialiased', marginBottom: '2rem', marginTop: 0, display: 'block', textAlign: 'center', background: 'none', boxShadow: 'none', border: 'none', outline: 'none', textTransform: 'none', fontSize: '2rem' }}>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8" style={{ color: '#ef5a63', fontWeight: 700, fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.1, WebkitTextStroke: '0px', textShadow: 'none', textRendering: 'optimizeLegibility', MozOsxFontSmoothing: 'grayscale', WebkitFontSmoothing: 'antialiased', marginBottom: '2rem', marginTop: 0, display: 'block', textAlign: 'center', background: 'none', boxShadow: 'none', border: 'none', outline: 'none', textTransform: 'none', fontSize: '2rem', important: 'true' }}>
           Personalize Your Experience
         </h1>
         <span className="text-6xl mb-4" aria-hidden="true">{details.emoji}</span>

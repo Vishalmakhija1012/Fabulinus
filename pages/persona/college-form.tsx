@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function CollegeForm() {
   const router = useRouter();
@@ -14,8 +16,16 @@ export default function CollegeForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const journeyId = localStorage.getItem('journeyId');
+    const persona = localStorage.getItem('personaType') || 'college-student';
+    await addDoc(collection(db, 'personaForms'), {
+      journeyId,
+      persona,
+      formData: form,
+      createdAt: serverTimestamp(),
+    });
     router.push({
       pathname: '/persona/animation',
       query: {

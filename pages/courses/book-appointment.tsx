@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function BookAppointment() {
   const [showThankYou, setShowThankYou] = useState(false);
@@ -8,6 +10,33 @@ export default function BookAppointment() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError('');
+    // Phone validation
+    if (form.phone.length !== 10) {
+      setError('Phone number must be exactly 10 digits.');
+      setSubmitting(false);
+      return;
+    }
+    try {
+      const journeyId = typeof window !== 'undefined' ? localStorage.getItem('journeyId') : null;
+      const persona = typeof window !== 'undefined' ? localStorage.getItem('personaType') : null;
+      await addDoc(collection(db, 'appointments'), {
+        journeyId,
+        persona,
+        appointmentData: form,
+        createdAt: serverTimestamp(),
+      });
+      setShowThankYou(true);
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <main
@@ -20,22 +49,7 @@ export default function BookAppointment() {
             <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ fontFamily: 'Questrial, Inter, sans-serif', color: '#ef5a63' }}>Book Appointment with Aparna Mam</h1>
             <form
               className="w-full flex flex-col gap-4"
-              onSubmit={async e => {
-                e.preventDefault();
-                setSubmitting(true);
-                setError('');
-                // Phone validation
-                if (form.phone.length !== 10) {
-                  setError('Phone number must be exactly 10 digits.');
-                  setSubmitting(false);
-                  return;
-                }
-                // Simulate API call
-                setTimeout(() => {
-                  setSubmitting(false);
-                  setShowThankYou(true);
-                }, 1200);
-              }}
+              onSubmit={handleSubmit}
             >
               <input
                 type="text"
