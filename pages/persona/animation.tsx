@@ -13,6 +13,7 @@ export default function Animation() {
   const [showLogo, setShowLogo] = useState(false);
   const [persona, setPersona] = useState<string | null>(null);
   const [formData, setFormData] = useState<any>(null);
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Fetch Firestore data on mount
@@ -23,19 +24,6 @@ export default function Animation() {
         setLoading(false);
         return;
       }
-      // Fetch persona selection
-      const personaQ = query(
-        collection(db, 'personaSelections'),
-        where('journeyId', '==', journeyId),
-        orderBy('createdAt', 'desc'),
-        limit(1)
-      );
-      const personaSnap = await getDocs(personaQ);
-      let personaType = null;
-      personaSnap.forEach(doc => {
-        personaType = doc.data().persona;
-      });
-      setPersona(personaType);
       // Fetch latest persona form
       const formQ = query(
         collection(db, 'personaForms'),
@@ -45,10 +33,18 @@ export default function Animation() {
       );
       const formSnap = await getDocs(formQ);
       let form = null;
+      let personaVal = null;
+      let createdAtVal = null;
       formSnap.forEach(doc => {
-        form = doc.data().formData;
+        const data = doc.data();
+        console.log('Fetched Firestore data:', data); // <-- Add this line
+        form = data.formData;
+        personaVal = data.persona;
+        createdAtVal = data.createdAt && data.createdAt.toDate ? data.createdAt.toDate().toLocaleString() : null;
       });
       setFormData(form);
+      setPersona(personaVal);
+      setCreatedAt(createdAtVal);
       setLoading(false);
     };
     fetchData();
@@ -59,11 +55,7 @@ export default function Animation() {
     const timer1 = setTimeout(() => setShow(true), 600); // show summary after 0.6s
     const timer2 = setTimeout(() => setShowLogo(true), 3000); // show logo after 3s
     const timer3 = setTimeout(() => {
-      // Pass all query params to single-page
-      router.push({
-        pathname: '/courses/single-page',
-        query: router.query,
-      });
+      router.push({ pathname: '/courses/single-page' });
     }, 5000); // redirect after 5s
     return () => {
       clearTimeout(timer1);
@@ -72,28 +64,17 @@ export default function Animation() {
     };
   }, [router]);
 
-  // Add spinner animation CSS to the document head (only once)
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !document.getElementById('spinner-style')) {
-      const style = document.createElement('style');
-      style.id = 'spinner-style';
-      style.innerHTML = `
-        @keyframes spinnerFade { 0% { opacity: 1; } 100% { opacity: 0.2; } }
-        .spinner-dot { animation: spinnerFade 1.2s linear infinite; }
-        .spinner-dot {
-          background: #ef5a63 !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
-
-  // Compose summary sentence from Firestore data
-  let allAnswers = [];
-  if (formData) {
-    allAnswers = Object.entries(formData)
-      .filter(([key, value]) => value && key !== 'undefined')
-      .map(([key, value]) => highlight(value.toString().replace(/-/g, ' ')));
+  // Compose summary from only the 4 required fields
+  const summaryFields = ['goal', 'year', 'englishLevel', 'typeOfCourse'];
+  let allAnswers: any[] = [];
+  if (formData && typeof formData === 'object') {
+    allAnswers = summaryFields
+      .filter(key => formData[key])
+      .map(key => (
+        <span key={key}>
+          {key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase())}: {highlight(formData[key].toString().replace(/-/g, ' '))}
+        </span>
+      ));
   }
 
   const summary = (
@@ -102,9 +83,6 @@ export default function Animation() {
         <span>Let me find the best course for you for</span>
       </div>
       <div className="flex flex-wrap justify-center items-center gap-2 mt-3">
-        {persona && (
-          <span className="px-2 py-0.5 rounded-lg bg-[#ffe066] text-[#ef5a63] font-bold mx-1 animate-pulse">{persona.replace(/_/g, ' ')}</span>
-        )}
         {allAnswers}
       </div>
     </>
@@ -113,18 +91,7 @@ export default function Animation() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-[#f8fafc] px-4 py-12">
       <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-xl w-full flex flex-col items-center animate-fade-in-up min-h-[420px]" style={{ position: 'relative' }}>
-        {/* Always render the animated three dots at the bottom center, regardless of showLogo */}
-        <div
-          className="flex flex-col items-center justify-center"
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 34,
-            width: '100%',
-            pointerEvents: 'none',
-          }}
-        >
+        <div className="flex flex-col items-center justify-center" style={{ position: 'absolute', left: 0, right: 0, bottom: 34, width: '100%', pointerEvents: 'none' }}>
           <style>{`
             @keyframes dotFade {
               0%, 80%, 100% { opacity: 0.3; }

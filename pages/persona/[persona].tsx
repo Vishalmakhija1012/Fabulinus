@@ -65,6 +65,21 @@ export default function PersonaDetail() {
     }
   }, [details, persona]);
 
+  React.useEffect(() => {
+    // Generate a new UUID (RFC4122 version 4 compliant)
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    if (typeof window !== 'undefined') {
+      const newJourneyId = generateUUID();
+      localStorage.setItem('journeyId', newJourneyId);
+      console.log('[persona].tsx: New journeyId set:', newJourneyId);
+    }
+  }, []);
+
   if (!details) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">

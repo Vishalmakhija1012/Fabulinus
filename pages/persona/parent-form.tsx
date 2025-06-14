@@ -6,9 +6,9 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 export default function ParentForm() {
   const router = useRouter();
   const [form, setForm] = useState({
-    childAge: '',
+    year: '', // renamed from childAge
     goal: '',
-    preferredTime: '',
+    typeOfCourse: '', // renamed from preferredTime
     englishLevel: '',
   });
 
@@ -18,7 +18,16 @@ export default function ParentForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const journeyId = localStorage.getItem('journeyId');
+    // Generate a new journeyId for every submission
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    const newJourneyId = generateUUID();
+    localStorage.setItem('journeyId', newJourneyId);
+    const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'parent';
     await addDoc(collection(db, 'personaForms'), {
       journeyId,
@@ -29,9 +38,9 @@ export default function ParentForm() {
     router.push({
       pathname: '/persona/animation',
       query: {
-        childAge: form.childAge,
+        year: form.year, // renamed
         goal: form.goal,
-        preferredTime: form.preferredTime,
+        typeOfCourse: form.typeOfCourse, // renamed
         englishLevel: form.englishLevel,
       },
     });
@@ -50,8 +59,8 @@ export default function ParentForm() {
         <label className="font-semibold text-[#23242b]">Child's Age
           <div className="relative">
             <select
-              name="childAge"
-              value={form.childAge}
+              name="year" // renamed from childAge
+              value={form.year}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"
@@ -114,8 +123,8 @@ export default function ParentForm() {
         <label className="font-semibold text-[#23242b]">Type of Course
           <div className="relative">
             <select
-              name="preferredTime"
-              value={form.preferredTime}
+              name="typeOfCourse" // renamed from preferredTime
+              value={form.typeOfCourse}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"

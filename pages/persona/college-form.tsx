@@ -9,7 +9,7 @@ export default function CollegeForm() {
     year: '',
     goal: '',
     englishLevel: '',
-    typeOfCourse: '', // Added for Type of Course dropdown
+    typeOfCourse: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,7 +18,16 @@ export default function CollegeForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const journeyId = localStorage.getItem('journeyId');
+    // Generate a new journeyId for every submission
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    const newJourneyId = generateUUID();
+    localStorage.setItem('journeyId', newJourneyId);
+    const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'college-student';
     await addDoc(collection(db, 'personaForms'), {
       journeyId,

@@ -6,10 +6,11 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 export default function PersonalGrowthForm() {
   const router = useRouter();
   const [form, setForm] = useState({
-    focusArea: '',
+    year: '', // renamed from focusArea
     goal: '',
     typeOfCourse: '',
-    comfortLevel: '',
+    englishLevel: '', // renamed from comfortLevel
+    // childAge removed
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,7 +19,16 @@ export default function PersonalGrowthForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const journeyId = localStorage.getItem('journeyId');
+    // Generate a new journeyId for every submission
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    const newJourneyId = generateUUID();
+    localStorage.setItem('journeyId', newJourneyId);
+    const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'personal_growth';
     await addDoc(collection(db, 'personaForms'), {
       journeyId,
@@ -29,10 +39,11 @@ export default function PersonalGrowthForm() {
     router.push({
       pathname: '/persona/animation',
       query: {
-        focusArea: form.focusArea,
+        year: form.year, // renamed
         goal: form.goal,
-        comfortLevel: form.comfortLevel,
+        englishLevel: form.englishLevel, // renamed
         typeOfCourse: form.typeOfCourse,
+        // childAge removed
       },
     });
   };
@@ -47,11 +58,11 @@ export default function PersonalGrowthForm() {
         aria-label="Personal Growth Persona Form"
       >
         <h1 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Tell us about your personal growth journey</h1>
-        <label className="font-semibold text-[#23242b]">Focus Area
+        <label className="font-semibold text-[#23242b]">Highest Qualification
           <div className="relative">
             <select
-              name="focusArea"
-              value={form.focusArea}
+              name="year" // renamed from focusArea
+              value={form.year}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"
@@ -94,8 +105,8 @@ export default function PersonalGrowthForm() {
         <label className="font-semibold text-[#23242b]">English Comfort
           <div className="relative">
             <select
-              name="comfortLevel"
-              value={form.comfortLevel}
+              name="englishLevel" // renamed from comfortLevel
+              value={form.englishLevel}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"

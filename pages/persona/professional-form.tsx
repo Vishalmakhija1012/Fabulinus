@@ -7,9 +7,10 @@ export default function ProfessionalForm() {
   const router = useRouter();
   const [form, setForm] = useState({
     goal: '',
-    experience: '',
+    year: '', // renamed from experience
     englishLevel: '',
     typeOfCourse: '',
+    // childAge removed
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,7 +19,16 @@ export default function ProfessionalForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const journeyId = localStorage.getItem('journeyId');
+    // Generate a new journeyId for every submission
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    const newJourneyId = generateUUID();
+    localStorage.setItem('journeyId', newJourneyId);
+    const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'professional';
     await addDoc(collection(db, 'personaForms'), {
       journeyId,
@@ -29,10 +39,11 @@ export default function ProfessionalForm() {
     router.push({
       pathname: '/persona/animation',
       query: {
-        experience: form.experience,
+        year: form.year, // renamed
         goal: form.goal,
         englishLevel: form.englishLevel,
         typeOfCourse: form.typeOfCourse,
+        // childAge removed
       },
     });
   };
@@ -50,8 +61,8 @@ export default function ProfessionalForm() {
         <label className="font-semibold text-[#23242b]">Years of Experience
           <div className="relative">
             <select
-              name="experience"
-              value={form.experience}
+              name="year" // renamed from experience
+              value={form.year}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"
