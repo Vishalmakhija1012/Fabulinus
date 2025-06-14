@@ -1,0 +1,701 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #f6f2fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #b39ddb;
+  border-radius: 8px;
+}
+
+/* Body Styles */
+body {
+  background-color: #f8fafc;
+  color: #18181b;
+  font-family: 'Inter', 'sans-serif';
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  background-image: linear-gradient(135deg, #f6f2fa 0%, #e3f0ff 100%);
+}
+
+/* Fix: Ensure testimonial section background is red and not overridden by global styles */
+.testimonial-section-red,
+.great-framework-section-red {
+  background-color: #ef5a63 !important;
+}
+
+/* --- Modern Minimal Section Styles --- */
+section {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 2rem !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Questrial', 'Poppins', 'sans-serif';
+  color: #23242b;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2em;
+}
+
+/* Links */
+a {
+  color: #2563eb;
+  text-decoration: none !important;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #b39ddb;
+  text-decoration: none !important;
+}
+
+/* --- Minimal Button Utility --- */
+.btn, .banner-btn {
+  border-radius: 9999px;
+  font-family: 'Questrial', 'Poppins', 'sans-serif';
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background: #ef5a63;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  transition: background 0.18s, color 0.18s;
+  text-decoration: none !important;
+  letter-spacing: 0.04em;
+}
+.btn:hover, .banner-btn:hover {
+  background: #e04a54;
+  color: #fff;
+}
+
+/* --- Minimal Card Utility --- */
+.minimal-card {
+  background: #f9fafb;
+  border-radius: 1.25rem;
+  box-shadow: none;
+  border: none;
+  padding: 1.5rem 2rem;
+}
+
+/* --- Info Row --- */
+.info-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.info-row .info-card {
+  background: #f9fafb;
+  border-radius: 1rem;
+  padding: 1.1rem 1.5rem;
+  min-width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.info-row .info-label {
+  font-size: 0.85rem;
+  color: #7b8a99;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.info-row .info-value {
+  font-size: 1.1rem;
+  color: #23242b;
+  font-weight: 700;
+}
+
+/* Modern Section Borders */
+section {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* Modern Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeInMenu 0.18s cubic-bezier(.4,0,.2,1) both;
+}
+
+/*
+Add these custom animation classes for the hero section's subtle effects.
+*/
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(32px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+@keyframes fade-in-slow {
+  0% { opacity: 0;}
+  100% { opacity: 1;}
+}
+@keyframes float {
+                                                                   0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-10px);}
+}
+@keyframes float-x {
+  0%, 100% { transform: translateX(0);}
+  50% { transform: translateX(8px);}
+}
+@keyframes float-x-reverse {
+  0%, 100% { transform: translateX(0);}
+  50% { transform: translateX(-8px);}
+}
+.animate-fade-in-up { animation: fade-in-up 1s cubic-bezier(.4,0,.2,1) both; }
+.animate-fade-in-slow { animation: fade-in-slow 1.5s 0.2s cubic-bezier(.4,0,.2,1) both; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-float-slow { animation: float 5s ease-in-out infinite; }
+.animate-float-x { animation: float-x 4s ease-in-out infinite; }
+.animate-float-x-reverse { animation: float-x-reverse 4s ease-in-out infinite; }
+
+/* Modern Section Accent Borders */
+.border-t-8 {
+  border-top-width: 8px !important;
+}
+.border-primary\/30 {
+  border-top-color: #2563eb4d !important;
+}
+.border-lilac\/40 {
+  border-top-color: #b39ddb66 !important;
+}
+.border-blush\/40 {
+  border-top-color: #ffe4ec66 !important;
+}
+.border-gold\/40 {
+  border-top-color: #ffd70066 !important;
+}
+
+/* Modern Section Padding */
+section {
+  padding: 3rem 2rem;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 640px) {
+  section {
+    padding: 0 !important;
+    border-radius: 1.2rem !important;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .minimal-card {
+    padding: 1rem 1.2rem;
+  }
+  .info-row {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+/* --- Enhanced Mobile Styles for Modern, Impactful Look (CLEANED) --- */
+@media (max-width: 600px) {
+  /* Universal: Prevent horizontal scroll everywhere */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Universal: All section children stack vertically, full width */
+  section,
+  section > div,
+  section > * {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    display: block;
+  }
+
+  /* All main sections: stack children vertically, no flex-row */
+  section,
+  .testimonial-section-red,
+  .great-framework-section-red {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    min-height: unset !important;
+    height: auto !important;
+    margin-bottom: 2.2em !important;
+    padding: 2.2em 0.7em !important;
+    border-radius: 1.2em !important;
+    box-shadow: 0 2px 12px 0 rgba(37,99,235,0.04);
+    background: #fff !important;
+  }
+
+  /* All section direct children: vertical stacking, full width */
+  section > div,
+  .testimonial-section-red > div,
+  .great-framework-section-red > div {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto 1.5em auto !important;
+    padding: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Two-column layouts inside sections: force column direction */
+  .flex,
+  .flex-row,
+  .md\:flex-row,
+  .flex-nowrap {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.2em !important;
+  }
+
+  /* Images inside sections: scale to width, no overflow */
+  section img,
+  section .next-image,
+  section .w-full,
+  section .max-w-2xl,
+  section .max-w-3xl,
+  section .max-w-4xl,
+  section .max-w-5xl,
+  section .max-w-6xl {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto 1.2em auto !important;
+    border-radius: 1em !important;
+    object-fit: contain !important;
+  }
+
+  /* Cards and info rows: stack vertically, full width, spacing */
+  .info-row,
+  .minimal-card,
+  .flex-1,
+  .gap-6,
+  .gap-4,
+  .gap-8 {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    gap: 1.2em !important;
+    margin-bottom: 1.2em !important;
+  }
+  .minimal-card,
+  .info-row .info-card {
+    padding: 1.2em 1em !important;
+    margin: 0 0 1.2em 0 !important;
+    border-radius: 1em !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Testimonial carousel: cards stack, arrows below, dots visible */
+  .testimonial-section-red .flex-row,
+  .testimonial-section-red .md\:flex-row,
+  .testimonial-section-red .flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.2em !important;
+  }
+  .testimonial-section-red .shadow-xl,
+  .testimonial-section-red .rounded-3xl {
+    box-shadow: none !important;
+    border-radius: 1em !important;
+  }
+  .testimonial-section-red .w-full,
+  .testimonial-section-red .max-w-6xl {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+  }
+  .testimonial-section-red .flex-row.items-stretch.justify-center.gap-8 {
+    flex-direction: column !important;
+    gap: 1.2em !important;
+    align-items: stretch !important;
+  }
+  .testimonial-section-red .rounded-2xl,
+  .testimonial-section-red .shadow-xl {
+    border-radius: 1em !important;
+    box-shadow: none !important;
+  }
+  .testimonial-section-red .px-8,
+  .testimonial-section-red .py-8 {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+  }
+  .testimonial-section-red .w-14,
+  .testimonial-section-red .h-14 {
+    width: 2.5em !important;
+    height: 2.5em !important;
+  }
+  .testimonial-section-red .absolute.left-0,
+  .testimonial-section-red .absolute.right-0 {
+    position: static !important;
+    margin: 1em auto !important;
+    left: unset !important;
+    right: unset !important;
+    top: unset !important;
+    transform: none !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .testimonial-section-red .-bottom-12 {
+    position: static !important;
+    margin: 1em auto 0 auto !important;
+    left: unset !important;
+    transform: none !important;
+  }
+
+  /* GREAT framework cards: stack vertically, full width */
+  .great-framework-section-red .flex-1,
+  .great-framework-section-red .gap-6 {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    gap: 1.2em !important;
+  }
+  .great-framework-section-red .min-w-\[600px\],
+  .great-framework-section-red .max-w-\[600px\] {
+    min-width: 0 !important;
+    max-width: 100vw !important;
+  }
+  .great-framework-section-red .p-6 {
+    padding: 1.2em 1em !important;
+  }
+
+  /* FAQ section: vertical, readable, spacing */
+  #faqs,
+  #faqs > div,
+  #faqs .max-w-4xl,
+  #faqs .w-full {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  #faqs h2 {
+    font-size: 2em !important;
+    margin-top: 0.7em !important;
+    margin-bottom: 0.7em !important;
+  }
+  #faqs ol {
+    padding-left: 1em !important;
+    margin-bottom: 1.5em !important;
+  }
+  #faqs li {
+    margin-bottom: 1.5em !important;
+  }
+  #faqs .flex-col,
+  #faqs .sm\:flex-row {
+    flex-direction: column !important;
+    gap: 1.2em !important;
+    width: 100% !important;
+  }
+
+  /* Buttons: full width, spacing, touch-friendly */
+  .btn,
+  .banner-btn,
+  .rounded-xl,
+  .rounded-2xl {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    font-size: 1.1em !important;
+    padding: 1em 0 !important;
+    margin-bottom: 1em !important;
+    border-radius: 1em !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Social icons: center, spacing */
+  .flex-row.gap-4,
+  .flex-row.gap-2,
+  .flex-row.gap-8 {
+    justify-content: center !important;
+    gap: 1em !important;
+    margin-bottom: 1em !important;
+  }
+
+  /* Scrolling logos bar: full width, no overflow */
+  .scrollbar-hide,
+  .animate-logo-scroll,
+  .whitespace-nowrap {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    padding: 0.5em 0 !important;
+    margin: 0 auto !important;
+  }
+  .scrollbar-hide img,
+  .animate-logo-scroll img {
+    height: 2.2em !important;
+    max-width: 80vw !important;
+    margin: 0 0.7em !important;
+  }
+
+  /* Headings, paragraphs: spacing for readability */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.7em !important;
+    margin-bottom: 0.5em !important;
+    line-height: 1.18 !important;
+  }
+  p {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.7em !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Remove min-heights and fixed heights from sections */
+  section,
+  .testimonial-section-red,
+  .great-framework-section-red,
+  #faqs {
+    min-height: unset !important;
+    height: auto !important;
+  }
+
+  /* Remove negative margins and extra offsets */
+  .mt-[-12px],
+  .-mt-5,
+  .mb-8,
+  .mt-8,
+  .mb-12,
+  .mt-20,
+  .mb-20 {
+    margin-top: 0 !important;
+    margin-bottom: 1.2em !important;
+  }
+
+  /* --- Fix: Keep trust avatars in a horizontal row of small circles on mobile --- */
+  .trusted-avatars,
+  .trusted-avatars-row,
+  .-space-x-3,
+  .trusted-by-avatars {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  .trusted-avatars img,
+  .trusted-avatars-row img,
+  .-space-x-3 img,
+  .trusted-by-avatars img {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+    max-width: 2.5rem !important;
+    max-height: 2.5rem !important;
+    border-radius: 9999px !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 4px 0 rgba(44,62,80,0.10);
+    border: 2px solid #fff;
+    background: #fff;
+  }
+  /* Remove stacking for the parent flex-row of avatars */
+  .flex.items-center.gap-2.-mt-5 {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.5em !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.5em !important;
+    width: auto !important;
+  }
+
+  .notification-banner {
+    display: none !important;
+  }
+
+  header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Add space for logo and nav */
+    flex-direction: row !important;
+    gap: 0.7em !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 56px !important;
+    padding: 0 1em !important;
+  }
+  header .logo,
+  header img[alt="Fabulinus Logo"] {
+    display: inline-block !important;
+    height: 32px !important;
+    width: auto !important;
+    max-height: 32px !important;
+    margin-right: 0.5em !important;
+    vertical-align: middle !important;
+  }
+  header nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1em !important;
+    flex: 1 1 auto !important;
+    justify-content: flex-end !important;
+  }
+
+  /* Only for index page: show mobile header, hide desktop header */
+  .fabulinus-mobile-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1.2em !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 56px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 12px 0 rgba(37,99,235,0.04);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    padding: 0 1em !important;
+  }
+  .fabulinus-mobile-header .mobile-logo {
+    display: flex !important;
+    align-items: center !important;
+    margin-right: 1em !important;
+  }
+  .fabulinus-mobile-header .mobile-logo img {
+    height: 32px !important;
+    width: auto !important;
+    max-height: 32px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+  .fabulinus-mobile-header .mobile-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1.2em !important;
+  }
+  .fabulinus-mobile-header .mobile-nav-link {
+    color: #23242b !important;
+    font-family: 'Questrial', 'sans-serif';
+    font-weight: 700;
+    font-size: 1.1em;
+    text-decoration: none !important;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0.2em 0.7em !important;
+    border-radius: 0.7em !important;
+    transition: color 0.18s;
+  }
+  .fabulinus-mobile-header .mobile-nav-link:hover {
+    color: #ef5a63 !important;
+  }
+  /* Hide desktop header on mobile for index page */
+  .fabulinus-desktop-header {
+    display: none !important;
+  }
+
+  /* Social icons row in section 2: always horizontal, centered, no wrap */
+  .fabulinus-social-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.2em !important;
+    margin-bottom: 1em !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .fabulinus-social-row a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 0.2em !important;
+  }
+
+  /* Hide scrollbar for logos bar */
+  .fabulinus-logos-bar {
+    overflow-x: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .fabulinus-logos-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Animate logos bar horizontally, infinite loop */
+  @keyframes fabulinuScrollX {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .fabulinus-logos-bar-inner {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 2.2em !important;
+    min-width: 200vw !important;
+    animation: fabulinuScrollX 28s linear infinite;
+    will-change: transform;
+  }
+  .fabulinus-logos-bar-inner img {
+    height: 2.2em !important;
+    width: auto !important;
+    margin: 0 0.7em !important;
+    max-width: 80vw !important;
+    object-fit: contain !important;
+  }
+
+  /* --- Fix: Keep bullet points horizontal in lists under .horizontal-bullets on mobile --- */
+  .horizontal-bullets > li {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 0.5em !important;
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  .live-classes-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.6em !important;
+    width: 100% !important;
+  }
+  .live-classes-row .live-dot {
+    flex-shrink: 0 !important;
+    margin-right: 0.5em !important;
+  }
+  .live-classes-row .live-text {
+    flex: 1 1 0% !important;
+    text-align: left !important;
+    word-break: break-word !important;
+  }
+}
+
+/* End mobile universal layout fix */
