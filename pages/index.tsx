@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const check = () => setIsDesktop(window.innerWidth >= 768);
     check();
     window.addEventListener('resize', check);
@@ -44,6 +45,7 @@ function TestimonialCarousel() {
   // Hydration fix: default to false, only update after mount
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -216,6 +218,7 @@ export default function Home() {
   // Desktop-only hero image: only render after mount if desktop
   const [showHeroImage, setShowHeroImage] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const checkDesktop = () => setShowHeroImage(window.innerWidth >= 768);
     checkDesktop();
     window.addEventListener('resize', checkDesktop);
@@ -224,6 +227,7 @@ export default function Home() {
 
   const [isMobileGREAT, setIsMobileGREAT] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR mismatch
     const check = () => setIsMobileGREAT(window.innerWidth < 640);
     check();
     window.addEventListener('resize', check);

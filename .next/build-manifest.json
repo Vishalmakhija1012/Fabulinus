@@ -28,11 +28,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/courses/single-page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/courses/single-page.js"
-    ],
     "/persona/animation": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
