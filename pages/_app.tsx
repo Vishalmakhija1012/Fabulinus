@@ -20,8 +20,8 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-paleLilac via-white to-softBlue">
         {!isCourses && <NotificationBanner />}
-        {/* Only show Header if not on index page (mobile) */}
-        {!(isHome && isMobile) && !isCourses && <Header />}
+        {/* Always show Header except on /courses pages */}
+        {!isCourses && <Header />}
         <main className="flex-1 pt-24 pb-8 fade-in">
           {isHome ? (
             <Component {...pageProps} />
