@@ -1,16 +1,13 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { db } from '../../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function PersonalGrowthForm() {
   const router = useRouter();
   const [form, setForm] = useState({
-    year: '', // renamed from focusArea
+    year: '', // years of experience
     goal: '',
     typeOfCourse: '',
-    englishLevel: '', // renamed from comfortLevel
-    // childAge removed
+    englishLevel: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,22 +27,9 @@ export default function PersonalGrowthForm() {
     localStorage.setItem('journeyId', newJourneyId);
     const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'personal_growth';
-    await addDoc(collection(db, 'personaForms'), {
-      journeyId,
-      persona,
-      formData: form,
-      createdAt: serverTimestamp(),
-    });
-    router.push({
-      pathname: '/persona/animation',
-      query: {
-        year: form.year, // renamed
-        goal: form.goal,
-        englishLevel: form.englishLevel, // renamed
-        typeOfCourse: form.typeOfCourse,
-        // childAge removed
-      },
-    });
+    // Save form data to localStorage for next page fallback
+    localStorage.setItem('personaFormData', JSON.stringify(form));
+    router.push('/courses/single-page');
   };
 
   return (
@@ -58,22 +42,21 @@ export default function PersonalGrowthForm() {
         aria-label="Personal Growth Persona Form"
       >
         <h1 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Tell us about your personal growth journey</h1>
-        <label className="font-semibold text-[#23242b]">Highest Qualification
+        <label className="font-semibold text-[#23242b]">Years of Experience
           <div className="relative">
             <select
-              name="year" // renamed from focusArea
+              name="year"
               value={form.year}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"
               style={{ position: 'relative', zIndex: 10 }}
             >
-              <option value="" disabled>Select area</option>
-              <option value="public-speaking">Public Speaking</option>
-              <option value="confidence">Confidence Building</option>
-              <option value="career">Career Growth</option>
-              <option value="relationships">Relationships</option>
-              <option value="other">Other</option>
+              <option value="" disabled>Select years of experience</option>
+              <option value="0-3">0-3 years</option>
+              <option value="4-7">4-7 years</option>
+              <option value="8-15">8-15 years</option>
+              <option value="15+">15+ years</option>
             </select>
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-[#ef5a63] z-20">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="#ef5a63" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>

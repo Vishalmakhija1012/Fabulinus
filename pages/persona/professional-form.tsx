@@ -1,16 +1,13 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { db } from '../../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function ProfessionalForm() {
   const router = useRouter();
   const [form, setForm] = useState({
+    year: '', // years of experience
     goal: '',
-    year: '', // renamed from experience
     englishLevel: '',
     typeOfCourse: '',
-    // childAge removed
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,22 +27,9 @@ export default function ProfessionalForm() {
     localStorage.setItem('journeyId', newJourneyId);
     const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'professional';
-    await addDoc(collection(db, 'personaForms'), {
-      journeyId,
-      persona,
-      formData: form,
-      createdAt: serverTimestamp(),
-    });
-    router.push({
-      pathname: '/persona/animation',
-      query: {
-        year: form.year, // renamed
-        goal: form.goal,
-        englishLevel: form.englishLevel,
-        typeOfCourse: form.typeOfCourse,
-        // childAge removed
-      },
-    });
+    // Save form data to localStorage for next page fallback
+    localStorage.setItem('personaFormData', JSON.stringify(form));
+    router.push('/courses/single-page');
   };
 
   return (
@@ -61,20 +45,18 @@ export default function ProfessionalForm() {
         <label className="font-semibold text-[#23242b]">Years of Experience
           <div className="relative">
             <select
-              name="year" // renamed from experience
+              name="year"
               value={form.year}
               onChange={handleChange}
               required
               className="mt-2 w-full rounded-lg border border-[#ef5a63] px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ef5a63] transition-all duration-200 z-10"
               style={{ position: 'relative', zIndex: 10 }}
             >
-              <option value="" disabled>Select experience</option>
-              <option value="fresher">Fresher</option>
-              <option value="1-2">1 to 2</option>
-              <option value="2-5">2 to 5</option>
-              <option value="5-8">5 to 8</option>
-              <option value="8-12">8 to 12</option>
-              <option value="12+">12+</option>
+              <option value="" disabled>Select years of experience</option>
+              <option value="0-3">0-3 years</option>
+              <option value="4-7">4-7 years</option>
+              <option value="8-15">8-15 years</option>
+              <option value="15+">15+ years</option>
             </select>
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-[#ef5a63] z-20">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="#ef5a63" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>

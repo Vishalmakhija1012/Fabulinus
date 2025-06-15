@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { db } from '../../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function CollegeForm() {
   const router = useRouter();
@@ -29,21 +27,9 @@ export default function CollegeForm() {
     localStorage.setItem('journeyId', newJourneyId);
     const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'college-student';
-    await addDoc(collection(db, 'personaForms'), {
-      journeyId,
-      persona,
-      formData: form,
-      createdAt: serverTimestamp(),
-    });
-    router.push({
-      pathname: '/persona/animation',
-      query: {
-        year: form.year,
-        goal: form.goal,
-        englishLevel: form.englishLevel,
-        typeOfCourse: form.typeOfCourse,
-      },
-    });
+    // Save form data to localStorage for next page fallback
+    localStorage.setItem('personaFormData', JSON.stringify(form));
+    router.push('/courses/single-page');
   };
 
   return (

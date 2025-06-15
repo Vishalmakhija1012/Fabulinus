@@ -65,61 +65,61 @@ export default function PersonaDetail() {
     }
   }, [details, persona]);
 
-  React.useEffect(() => {
-    // Generate a new UUID (RFC4122 version 4 compliant)
-    function generateUUID() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
-    if (typeof window !== 'undefined') {
-      const newJourneyId = generateUUID();
-      localStorage.setItem('journeyId', newJourneyId);
-      console.log('[persona].tsx: New journeyId set:', newJourneyId);
-    }
-  }, []);
-
+  // Remove redirect logic. Instead, show detail page with button to proceed.
   if (!details) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">
         <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
-          <p className="text-lg">Invalid persona. <button className="text-[#ef5a63] underline font-semibold" onClick={() => router.push('/persona')}>Go back</button></p>
+          <p className="text-lg">Loading...</p>
         </div>
       </main>
     );
   }
 
+  // Map persona to form page
+  const getFormPage = (persona: string) => {
+    switch (persona) {
+      case 'parent':
+        return '/persona/parent-form';
+      case 'professional':
+        return '/persona/professional-form';
+      case 'college-student':
+        return '/persona/college-form';
+      case 'teacher':
+        return '/persona/teacher-form';
+      default:
+        return '/persona';
+    }
+  };
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">
-      <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-xl w-full flex flex-col items-center" style={{ marginTop: '-15px' }}>
-        <h1 className="text-3xl sm:text-4xl font-bold mb-8" style={{ color: '#ef5a63', fontWeight: 700, fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.1, WebkitTextStroke: '0px', textShadow: 'none', textRendering: 'optimizeLegibility', MozOsxFontSmoothing: 'grayscale', WebkitFontSmoothing: 'antialiased', marginBottom: '2rem', marginTop: 0, display: 'block', textAlign: 'center', background: 'none', boxShadow: 'none', border: 'none', outline: 'none', textTransform: 'none', fontSize: '2rem' }}>
-          Personalize Your Experience
-        </h1>
-        <span className="text-6xl mb-4" aria-hidden="true">{details.emoji}</span>
-        <h2 className="text-3xl sm:text-4xl font-bold mb-2">Welcome, {details.title}!</h2>
-        <p className="text-lg text-gray-700 mb-4 text-center">{details.description}</p>
-        <ul className="mb-6 w-full">
+      <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
+        <h2 className="text-3xl font-bold mb-2 text-[#f75b6a]">Personalize Your Experience</h2>
+        <div className="text-5xl mb-2">{details.emoji}</div>
+        <h1 className="text-2xl font-bold mb-2">Welcome, {details.title}!</h1>
+        <p className="mb-4 text-gray-700">{details.description}</p>
+        <ul className="text-left mb-6">
           {details.benefits.map((b, i) => (
-            <li key={i} className="flex items-center mb-2">
-              <span className="inline-block w-2 h-2 bg-[#ef5a63] rounded-full mr-3"></span>
-              <span>{b}</span>
+            <li key={i} className="flex items-center mb-1">
+              <span className="text-[#f75b6a] mr-2">•</span> {b}
             </li>
           ))}
         </ul>
         <button
-          className="w-full sm:w-auto px-6 py-3 bg-[#ef5a63] text-white rounded-full font-bold shadow hover:bg-[#e04a54] focus:outline-none focus:ring-2 focus:ring-[#ffe066] transition-all mb-3 border-2 border-[#ffe06622]"
-          style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '0.04em', minWidth: '220px' }}
-          onClick={() => router.push(`/courses?type=${persona}`)}
+          className="bg-[#f75b6a] text-white font-semibold rounded-full px-8 py-3 shadow-md hover:bg-[#e14b5a] transition mb-2"
+          onClick={() => router.push(getFormPage(persona as string))}
         >
           See Recommended Courses
         </button>
-        <button
-          className="text-[#ef5a63] underline text-sm mt-2 font-medium"
-          onClick={() => router.push('/persona')}
-        >
-          &larr; Choose a different persona
-        </button>
+        <div>
+          <a
+            href="/persona"
+            className="text-[#f75b6a] text-sm underline hover:text-[#e14b5a]"
+          >
+            ← Choose a different persona
+          </a>
+        </div>
       </div>
     </main>
   );

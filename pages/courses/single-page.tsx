@@ -18,35 +18,39 @@ export default function SinglePage() {
       try {
         // Get journeyId from localStorage
         const journeyId = typeof window !== 'undefined' ? localStorage.getItem('journeyId') : null;
-        if (!journeyId) {
-          setError('No journey found. Please start your journey again.');
-          setLoading(false);
-          return;
+        let data = null;
+        if (journeyId) {
+          // Try Firestore first
+          const docRef = doc(db, 'personaForms', journeyId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            data = docSnap.data();
+          }
         }
-        // Fetch persona form data from Firestore
-        const docRef = doc(db, 'personaForms', journeyId);
-        const docSnap = await getDoc(docRef);
-        if (!docSnap.exists()) {
-          // Clear stale journeyId
+        // Fallback: Try localStorage if Firestore fails or no doc
+        if (!data) {
+          const localForm = typeof window !== 'undefined' ? localStorage.getItem('personaFormData') : null;
+          if (localForm) {
+            data = { formData: JSON.parse(localForm), persona: localStorage.getItem('personaType') };
+          }
+        }
+        if (!data) {
           localStorage.removeItem('journeyId');
           setError('Your journey has expired or was not found. Please start again.');
           setLoading(false);
           return;
         }
-        const data = docSnap.data();
         // Normalize persona and course type
         let persona = 'Others';
         let typeOfCourse = 'Long Term';
-        // Persona mapping
-        if (data.persona === 'parent') persona = 'Parents';
+        if (data.persona === 'parent' || data.persona === 'Parents') persona = 'Parents';
         else persona = 'Others';
         // Course type mapping
         if (persona === 'Parents') {
-          // Parent form: preferredTime is typeOfCourse
-          typeOfCourse = data.preferredTime === 'short-term' ? 'Short Term' : 'Long Term';
+          // Parent form: typeOfCourse is in formData
+          typeOfCourse = data.formData.typeOfCourse === 'short-term' ? 'Short Term' : 'Long Term';
         } else {
-          // Others: typeOfCourse is typeOfCourse
-          typeOfCourse = data.typeOfCourse === 'short-term' ? 'Short Term' : 'Long Term';
+          typeOfCourse = data.formData.typeOfCourse === 'short-term' ? 'Short Term' : 'Long Term';
         }
         // Find the course in COURSE_LOGIC
         const foundCourse = COURSE_LOGIC.find(

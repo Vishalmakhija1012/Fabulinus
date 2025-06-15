@@ -27,7 +27,7 @@ const personas = [
 		description: 'Stand out in academics and beyond with advanced English skills.',
 	},
 	{
-		key: 'personal_growth',
+		key: 'teacher', // changed from 'personal_growth' to 'teacher'
 		emoji: '🌱', // changed to seedling for growth
 		title: 'Personal Growth',
 		age: 'For anyone seeking self-improvement', // changed
@@ -38,43 +38,43 @@ const personas = [
 export default function PersonaSelection() {
 	const router = useRouter();
 
-	const handleSelect = async (personaKey: string) => {
+	const handleSelect = (personaKey: string) => {
 		let journeyId = localStorage.getItem('journeyId');
 		if (!journeyId) {
 			journeyId = uuidv4();
 			localStorage.setItem('journeyId', journeyId);
 		}
-		// Save persona selection to Firestore
-		await addDoc(collection(db, 'personaSelections'), {
-			journeyId,
-			persona: personaKey,
-			createdAt: serverTimestamp(),
-		});
+		// Firestore code is commented out for local testing
+		// await addDoc(collection(db, 'personaSelections'), {
+		//   journeyId,
+		//   persona: personaKey,
+		//   createdAt: serverTimestamp(),
+		// });
 		if (typeof window !== 'undefined') {
 			localStorage.setItem('personaType', personaKey);
 		}
-		// Map personaKey to form page
-		let formPage = '';
+		// Map personaKey to detail page (not form page)
+		let detailPage = '';
 		switch (personaKey) {
 			case 'parent':
-				formPage = 'parent-form';
+				detailPage = 'parent';
 				break;
 			case 'professional':
-				formPage = 'professional-form';
+				detailPage = 'professional';
 				break;
 			case 'college-student':
-				formPage = 'college-form';
+				detailPage = 'college-student';
 				break;
-			case 'personal_growth':
-				formPage = 'teacher-form';
+			case 'teacher':
+				detailPage = 'teacher';
 				break;
 			default:
-				formPage = personaKey;
+				detailPage = personaKey;
 		}
 		// Preserve cta param if present
 		const cta = router.query.cta;
 		const query = cta ? `?cta=${encodeURIComponent(cta as string)}` : '';
-		router.push(`/persona/${formPage}${query}`);
+		router.push(`/persona/${detailPage}${query}`);
 	};
 
 	return (
