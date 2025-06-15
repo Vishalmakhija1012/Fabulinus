@@ -22,6 +22,21 @@ body {
   background-image: linear-gradient(135deg, #f6f2fa 0%, #e3f0ff 100%);
 }
 
+/* On mobile, set body background to pure white to eliminate any banding/gap between sections */
+@media (max-width: 640px) {
+  body {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+  }
+  /* On mobile, force all main containers to pure white to eliminate any banding/gap */
+  main, #__next, .container, .page-container {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+  }
+}
+
 /* Fix: Ensure testimonial section background is red and not overridden by global styles */
 .testimonial-section-red,
 .great-framework-section-red {
@@ -225,6 +240,17 @@ section {
     max-width: 100vw !important;
     box-sizing: border-box !important;
     display: block;
+  }
+
+  /* On mobile, force all wrappers and direct parents of sections to pure white and remove any box-shadow or border */
+  @media (max-width: 640px) {
+    body, main, #__next, .container, .page-container, .relative, .w-full, .max-w-6xl, .max-w-7xl, .mx-auto {
+      background: #fff !important;
+      background-color: #fff !important;
+      background-image: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
   }
 
   /* All main sections: stack children vertically, no flex-row */
@@ -699,3 +725,80 @@ section {
 }
 
 /* End mobile universal layout fix */
+
+/* Add a high z-index and outline to the mobile hero CTA button for visibility/debugging */
+@media (max-width: 640px) {
+  .hero-cta-mobile {
+    z-index: 9999 !important;
+    position: relative !important;
+    outline: 2px solid #ffe066 !important; /* Debug: yellow outline, remove after testing */
+  }
+  /* Ensure parent containers do not hide overflow */
+  .hero-section, .hero-section * {
+    overflow: visible !important;
+  }
+  /* Remove border-radius and ALL spacing for the first two sections to eliminate the gap */
+  section#why,
+  section#teachers {
+    border-radius: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  /* On mobile, ensure hero and teachers sections are perfectly flush with no gap */
+  section#why {
+    margin-bottom: 0 !important;
+  }
+  section#teachers {
+    margin-top: 0 !important;
+  }
+}
+
+/* --- Desktop: Progress bar/indicator under .fabulinus-logos-bar-inner --- */
+@media (min-width: 641px) {
+  .fabulinus-logos-bar-progress {
+    display: block !important;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, #b39ddb 0%, #ef5a63 100%);
+    border-radius: 2px;
+    margin-top: 0.5em;
+    opacity: 1;
+  }
+}
+@media (max-width: 640px) {
+  .fabulinus-logos-bar-progress {
+    display: none !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    background: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Only for the hero section's trusted avatars row: left-align with button */
+@media (max-width: 640px) {
+  section#why .trusted-avatars-row,
+  section#why .trusted-avatars-row .trusted-avatars,
+  section#why .trusted-avatars-row .-space-x-3,
+  section#why .trusted-avatars-row .trusted-by-avatars,
+  section#why .trusted-avatars-row span {
+    justify-content: flex-start !important;
+    align-items: center !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  section#why .trusted-avatars-row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    box-sizing: border-box !important;
+  }
+}

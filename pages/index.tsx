@@ -195,6 +195,49 @@ function TestimonialCarousel() {
   );
 }
 
+// --- Unified Mobile CTA Group (button + avatars in a single white, pill-shaped box) ---
+function MobileCTAGroup() {
+  return (
+    <div
+      className="flex flex-col w-full items-center px-4"
+      style={{
+        gap: 16,
+        margin: '18px auto 32px auto',
+        padding: '0 20px',
+        background: '#fff',
+        borderRadius: 20,
+        boxShadow: '0 2px 12px 0 rgba(44,62,80,0.06)',
+        border: '1px solid #f3f3f3',
+        maxWidth: 420,
+      }}
+    >
+      <Link
+        href="/persona"
+        className="font-bold rounded-2xl px-8 py-4 text-base uppercase tracking-wide border-2 border-[#ef5a63] text-[#ef5a63] bg-white shadow-lg hover:bg-[#fff0f2] transition-all duration-200 text-center min-w-[180px] whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#ef5a63] focus:ring-opacity-50"
+        style={{
+          fontFamily: 'Sora, sans-serif',
+          boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)',
+          letterSpacing: '0.03em',
+          marginBottom: 16,
+        }}
+      >
+        EXPLORE COURSES
+      </Link>
+      <div
+        className="flex items-center gap-2 w-full justify-center"
+        style={{ marginTop: 0, marginBottom: 4 }}
+      >
+        <div className="flex -space-x-3">
+          <Image src="/1.png" alt="Learner avatar 1" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
+          <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
+          <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
+        </div>
+        <span className="text-base text-[#23242b] ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [modalOpen, setModalOpen] = useState<null | 'trial' | 'courses'>(null);
   const [persona, setPersona] = useState(null);
@@ -255,12 +298,14 @@ export default function Home() {
             position: 'relative',
             minHeight: '750px',
             height: '750px',
-            ...(typeof window !== 'undefined' && window.innerWidth >= 768 ? { minHeight: '760px', height: '760px' } : {})
+            marginBottom: 0
           }}
         >
-          <div className="flex-1 flex flex-col justify-between items-stretch max-w-2xl w-full z-10 h-full pl-0 md:pl-[40px]">
+          <div className="flex-1 flex flex-col justify-between items-stretch max-w-2xl w-full z-10 h-full pl-0 md:pl-[40px]"
+            style={typeof window !== 'undefined' && window.innerWidth >= 768 ? { paddingTop: 64 } : {}} // 64px top padding for desktop only
+          >
             {/* Top: Title, subtitle, paragraph (spaced to fill ~620px) */}
-            <div className="flex flex-col flex-grow md:items-start" style={{height: 'auto', justifyContent: 'flex-start', padding: '40px 24px 0 24px', gap: isDesktop ? 12 : undefined}}>
+            <div className="flex flex-col flex-grow md:items-start" style={{height: 'auto', justifyContent: 'flex-start'}}>
               <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight tracking-tight mb-2 md:mb-3 mt-0 md:mt-0 text-left" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
                 Master English Communication
               </h1>
@@ -276,7 +321,6 @@ export default function Home() {
               </p>
               {/* Add spacing below the paragraph, matching the spacing above between Express/Communicate/Dominate and the paragraph */}
               {!isDesktop && <div style={{ height: 32 }} />}
-              {/* Removed mobile-only CTA + avatars group from hero section for mobile view as requested. No changes for desktop. */}
             </div>
             {/* Desktop: Button and trust indicator remain as before */}
             <div className="hidden md:flex flex-col w-full px-6 pb-8 md:pb-0">
@@ -285,7 +329,7 @@ export default function Home() {
                   marginTop: isDesktop ? '-200px' : undefined
                 }}
               >
-                <Link href="/persona" className="bg-[#ef5a63] text-white font-bold rounded-2xl px-6 py-3 text-base md:text-xl uppercase tracking-wide shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[160px] md:min-w-[220px] whitespace-nowrap border-2 border-[#ef5a63] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#ef5a63] focus:ring-opacity-50" style={{fontFamily: 'Sora, sans-serif', boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)'}}>
+                <Link href="/persona" className="bg-[#ef5a63] text-white font-bold rounded-2xl px-6 py-3 text-base md:text-xl uppercase tracking-wide shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[160px] md:min-w-[220px] whitespace-nowrap border-2 border-[#ef5a63] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#ef5a63] focus:ring-opacity-50 hero-cta-desktop" style={{fontFamily: 'Sora, sans-serif', boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)'}}>
                   Explore Courses
                 </Link>
               </div>
@@ -318,8 +362,10 @@ export default function Home() {
         <section
           id="teachers"
           tabIndex={-1}
-          className="w-full flex flex-col items-center justify-center py-0 px-4 md:px-0 bg-transparent rounded-3xl mx-auto mb-4 max-w-[420px] md:max-w-[420px]"
-          style={{ background: '#fffbe6', borderRadius: '32px', boxShadow: '0 4px 24px 0 rgba(239,90,99,0.08)', margin: '0 auto' }}
+          className="w-full flex flex-col items-center justify-center py-0 px-4 md:px-0 mx-auto mb-4 max-w-[420px] md:max-w-[420px]"
+          style={{
+            marginTop: 0 // Remove gap before teachers for all views
+          }}
         >
           <div className="flex flex-col items-center justify-center w-full h-full py-8 px-4 md:px-8"
             style={typeof window !== 'undefined' && window.innerWidth < 768 ? {
@@ -331,6 +377,7 @@ export default function Home() {
               background: 'transparent', // Remove box background
               boxShadow: 'none', // Remove shadow
               border: 'none', // Remove border
+              borderRadius: 0, // Remove border radius for mobile
             } : {}}>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#23242b] mb-2 text-center" style={{ fontFamily: 'Quesrial, sans-serif' }}>
               Learn from the best!
@@ -385,31 +432,9 @@ export default function Home() {
                 Google Aparna Sinha (Author)
               </a>
             </div>
-            <div className="fabulinus-logos-bar w-full overflow-x-hidden whitespace-nowrap py-4 px-2 relative scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
-              <style>{`
-                @keyframes logo-scroll {
-                  0% { transform: translateX(0); }
-                  100% { transform: translateX(-50%); }
-                }
-                @media (min-width: 768px) {
-                  .animate-logo-scroll {
-                    animation: logo-scroll 30s linear infinite;
-                  }
-                }
-              `}</style>
-              <div
-                className="fabulinus-logos-bar-inner inline-flex items-center gap-10 animate-logo-scroll"
-                style={{
-                  minWidth: '200%', // Ensure enough width for scrolling
-                }}
-              >
-                <img src="/republic.png" alt="Republic TV" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                <img src="/thehindu.png" alt="The Hindu" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                <img src="/hindustantimes.png" alt="Hindustan Times" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                <img src="/bt.png" alt="Business Times" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                <img src="/dainikbhaskar.png" alt="Dainik Bhaskar" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                <img src="/dainikjagran.png" alt="Dainik Jagran" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
-                {/* Repeat for infinite loop */}
+            {/* LOGOS BAR: Desktop version always, mobile version is now identical (no animation, no extra bar, just static row and progress bar) */}
+            <div className="fabulinus-logos-bar w-full overflow-x-hidden whitespace-nowrap py-4 px-2 relative scrollbar-hide">
+              <div className="fabulinus-logos-bar-inner inline-flex items-center gap-10">
                 <img src="/republic.png" alt="Republic TV" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
                 <img src="/thehindu.png" alt="The Hindu" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
                 <img src="/hindustantimes.png" alt="Hindustan Times" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
@@ -417,6 +442,7 @@ export default function Home() {
                 <img src="/dainikbhaskar.png" alt="Dainik Bhaskar" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
                 <img src="/dainikjagran.png" alt="Dainik Jagran" className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200" />
               </div>
+              <div className="fabulinus-logos-bar-progress" />
             </div>
           </div>
         </section>
@@ -507,7 +533,7 @@ export default function Home() {
                 <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
                 <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
               </div>
-              <span className="text-base ml-2 text-[#23242b] md:text-white" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
+              <span className="text-base ml-2 text-[#23242b] md:text-white" style={{fontFamily: 'Quesrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
             </div>
           </div>
           {/* Right: Info Cards Stacked Vertically */}
@@ -644,45 +670,7 @@ export default function Home() {
           </div>
         </section>
         {/* Mobile-only CTA + avatars group after GREAT cards (Section 4) */}
-        {!isDesktop && (
-          <div
-            className="flex flex-col w-full items-center px-4"
-            style={{
-              gap: 16,
-              margin: '18px auto 32px auto',
-              padding: '0 20px',
-              background: '#fff',
-              borderRadius: 20,
-              boxShadow: '0 2px 12px 0 rgba(44,62,80,0.06)',
-              border: '1px solid #f3f3f3',
-              maxWidth: 420,
-            }}
-          >
-            <Link
-              href="/persona"
-              className="font-bold rounded-2xl px-8 py-4 text-base uppercase tracking-wide border-2 border-[#ef5a63] text-[#ef5a63] bg-white shadow-lg hover:bg-[#fff0f2] transition-all duration-200 text-center min-w-[180px] whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#ef5a63] focus:ring-opacity-50"
-              style={{
-                fontFamily: 'Sora, sans-serif',
-                boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)',
-                letterSpacing: '0.03em',
-                marginBottom: 16,
-              }}
-            >
-              EXPLORE COURSES
-            </Link>
-            <div
-              className="flex items-center gap-2 w-full justify-center"
-              style={{ marginTop: 0, marginBottom: 4 }}
-            >
-              <div className="flex -space-x-3">
-                <Image src="/1.png" alt="Learner avatar 1" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
-                <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
-                <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
-              </div>
-              <span className="text-base text-[#23242b] ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
-            </div>
-          </div>
-        )}
+        {!isDesktop && <MobileCTAGroup />}
         {/* FAQ section - always a separate section */}
         <section
           id="faqs"
@@ -781,28 +769,14 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl mb-8 justify-center">
                 <Link
                   href="/persona?cta=courses"
-                  className="font-bold rounded-full px-8 py-4 text-lg md:text-xl uppercase tracking-wide border-2 border-[#ef5a63] text-white bg-[#ef5a63] shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[200px] whitespace-nowrap mx-auto"
+                  className="font-bold rounded-full px-8 py-4 text-lg md:text-xl uppercase tracking-wide border-2 border-[#ef5a63] text-white bg-[#ef5a63] shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[200px] whitespace-nowrap mx-auto hero-cta-mobile"
                   style={{
                     fontFamily: 'Sora, sans-serif',
                     boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)',
                     letterSpacing: '0.03em',
                     marginBottom: 0,
                     display: 'block',
-                    padding: '18px 32px', // More padding for a bolder look
-                    ...(typeof window !== 'undefined' && window.innerWidth < 768
-                      ? {
-                          color: '#fff',
-                          borderColor: '#ef5a63',
-                          background: '#ef5a63',
-                          width: 'fit-content',
-                          marginLeft: 'auto',
-                          marginRight: 'auto',
-                          fontWeight: 700,
-                          fontSize: '1.6rem',
-                          padding: '18px 32px',
-                          borderRadius: '32px',
-                        }
-                      : {})
+                    padding: '18px 32px', // default desktop/tablet
                   }}
                 >
                   EXPLORE COURSES
@@ -814,52 +788,59 @@ export default function Home() {
       </div>
       <style>{`
         @media (max-width: 640px) {
-          .great-card-mobile {
-            justify-content: flex-start !important;
-            align-items: stretch !important;
-            text-align: left !important;
-            margin-left: 12px !important;
-            margin-right: 12px !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
+          #teachers {
+            background: #fff !important;
+            border-radius: 0 !important;
           }
-          .great-card-row-mobile {
-            flex-direction: row !important;
-            display: flex !important;
-            min-height: 72px !important;
-            align-items: stretch !important;
+          .hero-cta-mobile {
+            background: #fff !important;
+            color: #ef5a63 !important;
+            border: 2px solid #ef5a63 !important;
+            border-radius: 0 !important; /* no rounded edges */
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            padding: 18px 0 !important;
+            width: 80vw !important;
+            min-width: 0 !important;
+            max-width: 95vw !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            box-shadow: 0 4px 16px 0 rgba(239,90,99,0.12) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.03em !important;
+            display: block !important;
+            transition: box-shadow 0.2s, background 0.2s;
           }
-          .great-card-alpha-mobile {
-            width: 20%;
-            min-width: 44px;
-            max-width: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.6em;
-            font-weight: 900;
-            color: #ef5a63;
-            font-family: 'Quesrial', 'Sora', sans-serif;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            background: none;
-            padding: 0;
-            margin: 0;
-            height: 100%;
-            text-align: center;
-            user-select: none;
+          .hero-cta-mobile:active {
+            box-shadow: 0 1px 6px 0 rgba(239,90,99,0.13) !important;
+            background: #fff0f2 !important;
+            color: #ef5a63 !important;
           }
-          .great-card-content-mobile {
-            width: 80%;
-            min-width: 0;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: flex-start !important;
-            height: 100%;
-            text-align: left !important;
-            padding-left: 0.5em;
-            padding-right: 0;
+          .hero-cta-desktop {
+            background: #fff !important;
+            color: #ef5a63 !important;
+            border: 2px solid #ef5a63 !important;
+            border-radius: 9999px !important; /* pill shape */
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            padding: 18px 0 !important;
+            width: 80vw !important; /* decrease width for mobile */
+            min-width: 0 !important;
+            max-width: 320px !important; /* decrease max width for pill */
+            margin-left: -22px !important; /* shift left by 22px total */
+            margin-right: 0 !important;
+            margin-top: 1px !important; /* move down by 1px */
+            box-shadow: 0 4px 16px 0 rgba(239,90,99,0.12) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.03em !important;
+            display: block !important;
+            text-align: center !important; /* center align text inside button */
+            transition: box-shadow 0.2s, background 0.2s;
+          }
+          .hero-cta-desktop:active {
+            box-shadow: 0 1px 6px 0 rgba(239,90,99,0.13) !important;
+            background: #fff0f2 !important;
+            color: #ef5a63 !important;
           }
         }
       `}</style>
