@@ -27,11 +27,11 @@ const personas = [
 		description: 'Stand out in academics and beyond with advanced English skills.',
 	},
 	{
-		key: 'teacher', // changed from 'personal_growth' to 'teacher'
-		emoji: '🌱', // changed to seedling for growth
-		title: 'Personal Growth',
-		age: 'For anyone seeking self-improvement', // changed
-		description: 'Communicate confidently in projects, business, and every life aspect.',
+		key: 'teacher',
+		emoji: '🧑‍🏫',
+		title: 'Teacher',
+		age: 'For educators and teachers',
+		description: 'Empower your students and enhance your teaching journey. Fabulinus supports educators with resources and training.',
 	},
 ];
 
