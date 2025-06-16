@@ -33,7 +33,7 @@ export default function PersonalGrowthForm() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-start justify-start bg-[#fafafa] px-0 sm:px-4 py-2 sm:py-8 persona-header-gap">
+    <main className="min-h-screen flex flex-col items-start justify-start bg-[#fafafa] px-0 sm:px-4 py-2 sm:py-8 persona-header-gap pt-14">
       <form
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-lg flex flex-col gap-5 px-2 py-6

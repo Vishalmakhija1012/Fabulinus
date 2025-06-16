@@ -73,7 +73,7 @@ export default function PersonaSelection() {
 	};
 
 	return (
-		<main className="min-h-screen bg-white flex flex-col items-start justify-start py-4 px-4 sm:items-center sm:justify-center sm:py-12 sm:px-6 lg:px-8 persona-header-gap">
+		<main className="min-h-screen bg-white flex flex-col items-start justify-start py-4 px-4 sm:items-center sm:justify-center sm:py-12 sm:px-6 lg:px-8 persona-header-gap pt-14">
 			<div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-4xl w-full flex flex-col items-center" style={{ marginTop: '-20px' }}>
 				<h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-[#ef5a63]">
 					Personalize Your Experience
