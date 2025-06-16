@@ -1085,8 +1085,12 @@ section {
   .persona-header-gap {
     margin-top: 4px !important;
   }
-  /* For [persona].tsx and persona/index.tsx, override marginTop on main card */
-  .persona-main-card {
-    margin-top: 4px !important;
+  /* Ensure heading and first card gap is exactly 4px on persona forms */
+  .persona-header-gap h1 {
+    margin-bottom: 4px !important;
+  }
+  .persona-header-gap > form,
+  .persona-header-gap > .persona-main-card {
+    margin-top: 0 !important;
   }
 }
