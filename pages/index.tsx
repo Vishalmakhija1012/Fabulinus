@@ -64,131 +64,136 @@ function TestimonialCarousel() {
         }
       >
         {visibleTestimonials.map((t, i) => (
-          <div
-            key={i}
-            className={
-              'flex flex-col transition-all duration-300' +
-              (isMobile
-                ? ' mb-8 w-full max-w-[370px] min-h-[320px] px-0 py-0 rounded-2xl shadow-sm testimonial-mobile-card'
-                : ' bg-white rounded-2xl shadow-xl px-4 py-6 md:px-8 md:py-8 mx-3')
-            }
-            style={
-              isMobile
-                ? {
-                    minWidth: 0,
-                    maxWidth: '370px',
-                    minHeight: '320px',
-                    margin: '32px 20px', // increased vertical and horizontal margin
-                    background: '#fff',
-                    borderRadius: '20px',
-                    boxShadow: '0 4px 24px 0 rgba(44,62,80,0.10)',
-                    border: '1.5px solid #f3f3f3',
-                    padding: '32px 28px 28px 28px',
-                    alignItems: 'stretch',
-                    justifyContent: 'center',
-                    height: '100%',
-                    position: 'relative',
-                  }
-                : {
-                    minWidth: 320,
-                    maxWidth: 370,
-                    minHeight: 320,
-                    boxShadow: '0 2px 8px 0 rgba(44,62,80,0.06)',
-                    zIndex: 1,
-                  }
-            }
-          >
-            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: isMobile ? 'center' : 'flex-start', height: '100%'}}>
-              <div
-                style={
-                  isMobile
-                    ? {
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '1em', // match Aparna bio section
-                        color: '#23242b',
-                        fontWeight: 400,
-                        textAlign: 'left', // left align
-                        marginBottom: 22,
-                        marginTop: 0,
-                        lineHeight: 1.5,
-                        minHeight: 90,
-                        width: '100%',
-                        display: 'block',
-                        letterSpacing: '-0.01em',
-                        paddingLeft: 2,
-                        paddingRight: 2,
-                      }
-                    : {
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '1em', // match Aparna bio section
-                        color: '#23242b',
-                        fontWeight: 400,
-                        textAlign: 'left', // left align
-                        marginBottom: 24,
-                        marginTop: 0,
-                        lineHeight: 1.5,
-                        minHeight: 100,
-                        width: '100%',
-                        display: 'block',
-                      }
-                }
-              >
-                {t.text}
-              </div>
-              {isMobile ? (
-                <div className="flex flex-row items-center w-full" style={{marginTop: 'auto', gap: 14}}>
-                  {/* Avatar - left */}
-                  <div
-                    style={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: '50%',
-                      overflow: 'hidden',
-                      border: '2.5px solid #fff',
+          <>
+            <div
+              key={i}
+              className={
+                'flex flex-col transition-all duration-300' +
+                (isMobile
+                  ? ' mb-8 w-full max-w-[370px] min-h-[320px] px-0 py-0 rounded-2xl shadow-sm testimonial-mobile-card'
+                  : ' bg-white rounded-2xl shadow-xl px-4 py-6 md:px-8 md:py-8 mx-3')
+              }
+              style={
+                isMobile
+                  ? {
+                      minWidth: 0,
+                      maxWidth: '370px',
+                      minHeight: '320px',
+                      margin: '32px 20px',
                       background: '#fff',
-                      flexShrink: 0,
-                      display: 'flex',
-                      alignItems: 'center',
+                      borderRadius: '20px',
+                      boxShadow: '0 4px 24px 0 rgba(44,62,80,0.10)',
+                      border: '1.5px solid #f3f3f3',
+                      padding: '32px 28px 28px 28px',
+                      alignItems: 'stretch',
                       justifyContent: 'center',
-                      marginRight: 0,
-                      boxShadow: '0 2px 12px 0 rgba(44,62,80,0.10)',
-                    }}
-                  >
+                      height: '100%',
+                      position: 'relative',
+                    }
+                  : {
+                      minWidth: 320,
+                      maxWidth: 370,
+                      minHeight: 320,
+                      boxShadow: '0 2px 8px 0 rgba(44,62,80,0.06)',
+                      zIndex: 1,
+                    }
+              }
+            >
+              <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: isMobile ? 'center' : 'flex-start', height: '100%'}}>
+                <div
+                  style={
+                    isMobile
+                      ? {
+                          fontFamily: 'Inter, sans-serif',
+                          fontSize: '1em', // match Aparna bio section
+                          color: '#23242b',
+                          fontWeight: 400,
+                          textAlign: 'left', // left align
+                          marginBottom: 22,
+                          marginTop: 0,
+                          lineHeight: 1.5,
+                          minHeight: 90,
+                          width: '100%',
+                          display: 'block',
+                          letterSpacing: '-0.01em',
+                          paddingLeft: 2,
+                          paddingRight: 2,
+                        }
+                      : {
+                          fontFamily: 'Inter, sans-serif',
+                          fontSize: '1em', // match Aparna bio section
+                          color: '#23242b',
+                          fontWeight: 400,
+                          textAlign: 'left', // left align
+                          marginBottom: 24,
+                          marginTop: 0,
+                          lineHeight: 1.5,
+                          minHeight: 100,
+                          width: '100%',
+                          display: 'block',
+                        }
+                  }
+                >
+                  {t.text}
+                </div>
+                {isMobile ? (
+                  <div className="flex flex-row items-center w-full" style={{marginTop: 'auto', gap: 14}}>
+                    {/* Avatar - left */}
+                    <div
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        border: '2.5px solid #fff',
+                        background: '#fff',
+                        flexShrink: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginRight: 0,
+                        boxShadow: '0 2px 12px 0 rgba(44,62,80,0.10)',
+                      }}
+                    >
+                      <Image
+                        src={t.img}
+                        alt={t.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full border-2 border-white shadow object-cover"
+                        style={{objectFit: 'cover', width: 60, height: 60}}
+                      />
+                    </div>
+                    {/* Text - right */}
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 0, flex: 1, gap: 2}}>
+                      <span style={{ fontFamily: 'Questrial, sans-serif', fontWeight: 700, fontSize: '1.18em', color: '#23242b', lineHeight: 1.1, textAlign: 'left', display: 'block', letterSpacing: '-0.01em' }}>{t.name}</span>
+                      <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500, fontSize: '1em', color: '#888', textAlign: 'left', display: 'block', marginTop: 2 }}>
+                        {t.tag} &ndash; {t.sub}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  // Desktop version (unchanged)
+                  <div className="flex items-center gap-2 md:gap-4 mt-auto">
                     <Image
                       src={t.img}
                       alt={t.name}
-                      width={60}
-                      height={60}
+                      width={54}
+                      height={54}
                       className="rounded-full border-2 border-white shadow object-cover"
-                      style={{objectFit: 'cover', width: 60, height: 60}}
                     />
+                    <div>
+                      <span className="font-bold text-[#23242b]" style={{ fontFamily: 'Quesrial, sans-serif', fontSize: '1.1em' }}>{t.name}</span>
+                      <span className="block text-xs text-[#888]" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>{t.tag} &ndash; {t.sub}</span>
+                    </div>
                   </div>
-                  {/* Text - right */}
-                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 0, flex: 1, gap: 2}}>
-                    <span style={{ fontFamily: 'Questrial, sans-serif', fontWeight: 700, fontSize: '1.18em', color: '#23242b', lineHeight: 1.1, textAlign: 'left', display: 'block', letterSpacing: '-0.01em' }}>{t.name}</span>
-                    <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500, fontSize: '1em', color: '#888', textAlign: 'left', display: 'block', marginTop: 2 }}>
-                      {t.tag} &ndash; {t.sub}
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                // Desktop version (unchanged)
-                <div className="flex items-center gap-2 md:gap-4 mt-auto">
-                  <Image
-                    src={t.img}
-                    alt={t.name}
-                    width={54}
-                    height={54}
-                    className="rounded-full border-2 border-white shadow object-cover"
-                  />
-                  <div>
-                    <span className="font-bold text-[#23242b]" style={{ fontFamily: 'Quesrial, sans-serif', fontSize: '1.1em' }}>{t.name}</span>
-                    <span className="block text-xs text-[#888]" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>{t.tag} &ndash; {t.sub}</span>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+            {isMobile && (
+              <hr className="mobile-section-divider-testimony" key={`divider-${i}`}/>
+            )}
+          </>
         ))}
       </div>
     </div>
@@ -358,13 +363,16 @@ export default function Home() {
               )}
             </div>
           </div>
+          {/* Mobile-only thin red divider at the end of section 1 */}
+          <hr className="mobile-section-divider" />
         </section>
         <section
           id="teachers"
           tabIndex={-1}
           className="w-full flex flex-col items-center justify-center py-0 px-4 md:px-0 mx-auto mb-4 max-w-[420px] md:max-w-[420px]"
           style={{
-            marginTop: 0 // Remove gap before teachers for all views
+            marginTop: 0, // Remove gap before teachers for all views
+            minHeight: typeof window !== 'undefined' && window.innerWidth < 640 ? 'calc(100% + 30px)' : undefined
           }}
         >
           <div className="flex flex-col items-center justify-center w-full h-full py-8 px-4 md:px-8"
@@ -446,7 +454,12 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="testimonies" tabIndex={-1} className="w-full min-h-[90vh] h-[90vh] py-0 px-6 md:px-32 bg-white flex flex-col items-center justify-center rounded-3xl mx-auto mb-8 max-w-[1400px] scroll-mt-[100px]"
+        {/* Mobile-only thin red divider between section 2 and 3 */}
+        <hr className="mobile-section-divider-between" />
+        <section
+          id="testimonies"
+          tabIndex={-1}
+          className="w-full min-h-[90vh] h-[90vh] py-0 px-6 md:px-32 bg-white flex flex-col items-center justify-center rounded-3xl mx-auto mb-8 max-w-[1400px] scroll-mt-[100px]"
           style={{
             minHeight: isDesktop ? '90vh' : '72vh',
             height: isDesktop ? '90vh' : '72vh',
@@ -492,6 +505,9 @@ export default function Home() {
               : {
                   minHeight: '90vh',
                   height: '90vh',
+                  marginBottom: 48, // add extra gap below GREAT section for mobile
+                  paddingTop: '-8px', // reduce top padding for mobile (12px - 20px)
+                  paddingBottom: '-8px', // reduce bottom padding for mobile (12px - 20px)
                 }
           }
         >
@@ -671,122 +687,197 @@ export default function Home() {
         </section>
         {/* Mobile-only CTA + avatars group after GREAT cards (Section 4) */}
         {!isDesktop && <MobileCTAGroup />}
-        {/* FAQ section - always a separate section */}
-        <section
-          id="faqs"
-          tabIndex={-1}
-          className="w-full py-16 px-6 md:px-32 bg-[#fafafa] flex flex-col items-center rounded-3xl mx-auto mb-8 max-w-[1200px] min-h-[65vh] mt-20 scroll-mt-[100px]"
-          style={
-            isDesktop
-              ? {
-                  marginTop: '64px',
-                  marginBottom: '64px',
-                  borderRadius: '32px',
-                  background: '#fafafa',
-                  boxShadow: '0 8px 32px 0 rgba(44,62,80,0.06)',
-                }
-              : {
-                  // Mobile: left align all FAQ content
-                  textAlign: 'left',
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                  marginTop: '32px',
-                  marginBottom: '24px',
-                  paddingLeft: 0,
-                  paddingRight: 0,
-                }
-          }
-        >
-          <div className="max-w-4xl w-full mx-auto flex flex-col items-center"
-            style={isDesktop ? {} : {alignItems: 'flex-start', textAlign: 'left', width: '100%'}}>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#23242b] mb-10 md:mb-20 text-center mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: isDesktop ? 'center' : 'left'}}>
-              Frequently Asked Questions
-            </h2>
-            <ol className="relative border-l-4 border-[#ef5a63] pl-8" style={isDesktop ? {} : {paddingLeft: 16}}>
-              {/* 1 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  Who are the teachers at Fabulinus?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  Aparna Sinha, a bestselling author, is supported by highly qualified, English language and communication experts
-                </p>
-              </li>
-              {/* 2 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  What is the GREAT Approach?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  The GREAT Approach is our unique and structured methodology, built on five pillars: Grading, Regular Monitoring, Experts, Accessibility, and Transparency. It is designed to ensure measurable improvement in communication and public speaking skills.
-                </p>
-              </li>
-              {/* 3 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  How are classes conducted?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  Classes are delivered one-on-one in an online format, offering personalized attention and flexible scheduling. You can book sessions at your convenience and access learning resources anytime.
-                </p>
-              </li>
-              {/* 4 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  What age groups do you cater to?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  We offer programs for all age groups—including young learners, students, working professionals, and anyone aiming to enhance their English and communication abilities.
-                </p>
-              </li>
-              {/* 5 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  How do I track my progress?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  You will receive regular feedback, detailed progress reports, and clear learning benchmarks after each session. Our transparent system ensures you stay informed and on track throughout your learning journey.
-                </p>
-              </li>
-              {/* 6 */}
-              <li className="mb-12 ml-6">
-                <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
-                <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
-                  How do I get appointment with Aparna Mam?
-                </h3>
-                <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
-                  Click the "Explore Courses" button anywhere on the site, fill in your details, and our team will contact you to schedule your session with Aparna Mam!
-                </p>
-              </li>
-            </ol>
-            {/* Main CTA Buttons */}
-            <div className="w-full flex flex-col items-center mt-10">
-              <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl mb-8 justify-center">
-                <Link
-                  href="/persona?cta=courses"
-                  className="font-bold rounded-full px-8 py-4 text-lg md:text-xl uppercase tracking-wide border-2 border-[#ef5a63] text-white bg-[#ef5a63] shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[200px] whitespace-nowrap mx-auto hero-cta-mobile"
-                  style={{
-                    fontFamily: 'Sora, sans-serif',
-                    boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)',
-                    letterSpacing: '0.03em',
-                    marginBottom: 0,
-                    display: 'block',
-                    padding: '18px 32px', // default desktop/tablet
-                  }}
-                >
-                  EXPLORE COURSES
-                </Link>
+        {/* Mobile-only divider and extra gap between GREAT and FAQ sections */}
+        <hr className="mobile-section-divider-faq" />
+        {/* Move Explore Courses group up by 15px for mobile only */}
+        <div className="explore-courses-mobile-gap-adjust" style={{ position: 'relative', zIndex: 10 }}>
+          <section
+            id="faqs"
+            tabIndex={-1}
+            className="w-full py-16 px-6 md:px-32 bg-[#fafafa] flex flex-col items-center rounded-3xl mx-auto mb-8 max-w-[1200px] min-h-[65vh] mt-20 scroll-mt-[100px] faqs-mobile-clean"
+            style={
+              isDesktop
+                ? {
+                    marginTop: '64px',
+                    marginBottom: '64px',
+                    borderRadius: '32px',
+                    background: '#fafafa',
+                    boxShadow: '0 8px 32px 0 rgba(44,62,80,0.06)',
+                  }
+                : {
+                    textAlign: 'left',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    marginTop: '32px',
+                    marginBottom: '24px',
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                    minHeight: '90vh', // increase height for mobile only
+                  }
+            }
+          >
+            <div className="max-w-4xl w-full mx-auto flex flex-col items-center faqs-mobile-inner"
+              style={isDesktop ? {} : {alignItems: 'flex-start', textAlign: 'left', width: '100%'}}>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#23242b] mb-10 md:mb-20 text-center mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: isDesktop ? 'center' : 'left'}}>
+                Frequently Asked Questions
+              </h2>
+              <ol className="faqs-mobile-list relative border-l-4 border-[#ef5a63] pl-8" style={isDesktop ? {} : {paddingLeft: 16}}>
+                {/* 1 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    Who are the teachers at Fabulinus?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    Aparna Sinha, a bestselling author, is supported by highly qualified, English language and communication experts
+                  </p>
+                </li>
+                {/* 2 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    What is the GREAT Approach?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    The GREAT Approach is our unique and structured methodology, built on five pillars: Grading, Regular Monitoring, Experts, Accessibility, and Transparency. It is designed to ensure measurable improvement in communication and public speaking skills.
+                  </p>
+                </li>
+                {/* 3 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    How are classes conducted?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    Classes are delivered one-on-one in an online format, offering personalized attention and flexible scheduling. You can book sessions at your convenience and access learning resources anytime.
+                  </p>
+                </li>
+                {/* 4 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    What age groups do you cater to?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    We offer programs for all age groups—including young learners, students, working professionals, and anyone aiming to enhance their English and communication abilities.
+                  </p>
+                </li>
+                {/* 5 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    How do I track my progress?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    You will receive regular feedback, detailed progress reports, and clear learning benchmarks after each session. Our transparent system ensures you stay informed and on track throughout your learning journey.
+                  </p>
+                </li>
+                {/* 6 */}
+                <li className="mb-12 ml-6">
+                  <div className="absolute w-6 h-6 bg-[#ef5a63] rounded-full -left-3 border-4 border-white"></div>
+                  <h3 className="font-bold text-xl text-[#ef5a63] mb-2 mx-4 my-2 px-2 py-2 md:mx-0 md:my-0 md:px-0 md:py-0" style={{fontFamily: 'Quesrial, sans-serif', textAlign: 'left'}}>
+                    How do I get appointment with Aparna Mam?
+                  </h3>
+                  <p className="text-[#23242b] text-base mb-2" style={{fontFamily: 'Inter, sans-serif', textAlign: 'left'}}>
+                    Click the "Explore Courses" button anywhere on the site, fill in your details, and our team will contact you to schedule your session with Aparna Mam!
+                  </p>
+                </li>
+              </ol>
+              {/* Main CTA Buttons */}
+              <div className="w-full flex flex-col items-center mt-10">
+                <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl mb-8 justify-center explore-courses-overlap-mobile">
+                  <Link
+                    href="/persona?cta=courses"
+                    className="font-bold rounded-full px-8 py-4 text-lg md:text-xl uppercase tracking-wide border-2 border-[#ef5a63] text-white bg-[#ef5a63] shadow-lg hover:bg-[#e04a54] transition-all duration-200 text-center min-w-[200px] whitespace-nowrap mx-auto hero-cta-mobile"
+                    style={{
+                      fontFamily: 'Sora, sans-serif',
+                      boxShadow: '0 4px 16px 0 rgba(239,90,99,0.12)',
+                      letterSpacing: '0.03em',
+                      marginBottom: 0,
+                      display: 'block',
+                      padding: '18px 32px', // default desktop/tablet
+                      position: 'relative',
+                    }}
+                  >
+                    EXPLORE COURSES
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
       <style>{`
+        @media (max-width: 640px) {
+          #teachers {
+            background: #fff !important;
+            border-radius: 0 !important;
+            min-height: calc(100% + 30px) !important;
+          }
+          .mobile-section-divider {
+            display: block;
+            border: none;
+            border-top: 0.5px solid #ef5a63;
+            width: 25vw;
+            margin: 18px auto 8px auto;
+            background: none;
+            height: 0;
+          }
+          .mobile-section-divider-between {
+            display: block;
+            border: none;
+            border-top: 0.5px solid #ef5a63;
+            width: 25vw;
+            margin: 18px auto 8px auto;
+            background: none;
+            height: 0;
+          }
+          .mobile-section-divider-testimony {
+            display: block;
+            border: none;
+            border-top: 0.5px solid #ef5a63;
+            width: 25vw;
+            margin: 18px auto 8px auto;
+            background: none;
+            height: 0;
+          }
+          .mobile-section-divider-faq {
+            display: block;
+            border: none;
+            border-top: 0.5px solid #ef5a63;
+            width: 25vw;
+            margin: 36px auto 36px auto; /* increased gap above and below divider */
+            background: none;
+            height: 0;
+          }
+          .great-card-alpha-mobile {
+            font-size: 2.5em !important;
+            color: #ef5a63 !important;
+            font-weight: 900 !important;
+            line-height: 1 !important;
+            margin-right: 12px !important;
+            margin-left: 2px !important;
+            letter-spacing: 0.04em !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            min-width: 1.5em;
+            text-align: left !important;
+          }
+          /* Add extra gap above FAQ section for mobile */
+          #faqs {
+            margin-top: 36px !important;
+            padding-top: 0 !important;
+          }
+        }
+        @media (min-width: 641px) {
+          .mobile-section-divider,
+          .mobile-section-divider-between,
+          .mobile-section-divider-testimony,
+          .mobile-section-divider-faq {
+            display: none;
+          }
+        }
         @media (max-width: 640px) {
           #teachers {
             background: #fff !important;
@@ -841,6 +932,83 @@ export default function Home() {
             box-shadow: 0 1px 6px 0 rgba(239,90,99,0.13) !important;
             background: #fff0f2 !important;
             color: #ef5a63 !important;
+          }
+        }
+      `}</style>
+      <style jsx global>{`
+        @media (max-width: 767px) {
+          .explore-courses-mobile-gap-adjust {
+            margin-top: -15px !important;
+          }
+        }
+      `}</style>
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .faqs-mobile-clean {
+            background: #fff !important;
+            border-radius: 18px !important;
+            box-shadow: 0 2px 16px 0 rgba(44,62,80,0.04) !important;
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
+            min-height: 90vh !important;
+          }
+          .faqs-mobile-inner {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: 100% !important;
+            align-items: flex-start !important;
+          }
+          .faqs-mobile-list {
+            border-left: 4px solid #ef5a63 !important;
+            padding-left: 18px !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100% !important;
+          }
+          .faqs-mobile-list > li {
+            margin-bottom: 32px !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            width: 100% !important;
+          }
+          .faqs-mobile-list h3 {
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            color: #ef5a63 !important;
+            margin-bottom: 6px !important;
+            margin-top: 0 !important;
+            padding: 0 !important;
+            text-align: left !important;
+            line-height: 1.3 !important;
+            letter-spacing: 0.01em !important;
+          }
+          .faqs-mobile-list p {
+            font-size: 1rem !important;
+            color: #23242b !important;
+            margin: 0 0 0 0 !important;
+            padding: 0 !important;
+            text-align: left !important;
+            line-height: 1.6 !important;
+            letter-spacing: 0.01em !important;
+          }
+          .faqs-mobile-list .absolute {
+            left: -18px !important;
+            top: 0 !important;
+            z-index: 2 !important;
+            background: #fff !important;
+            border: 4px solid #ef5a63 !important;
+            box-shadow: 0 2px 8px 0 rgba(44,62,80,0.06);
+          }
+          .faqs-mobile-list .absolute > div {
+            background: #ef5a63 !important;
+            border-radius: 50% !important;
+            width: 24px !important;
+            height: 24px !important;
+            border: 4px solid #fff !important;
+            box-shadow: 0 2px 8px 0 rgba(44,62,80,0.06);
           }
         }
       `}</style>
