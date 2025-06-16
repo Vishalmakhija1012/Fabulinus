@@ -1067,3 +1067,15 @@ section {
     box-shadow: 0 2px 8px 0 rgba(44,62,80,0.06);
   }
 }
+
+/* Persona specific styles */
+@media (max-width: 640px) {
+  /* Persona forms/pages: reduce gap between header and first card/container to 4px */
+  .persona-header-gap {
+    margin-top: 4px !important;
+  }
+  /* For [persona].tsx and persona/index.tsx, override marginTop on main card */
+  .persona-main-card {
+    margin-top: 4px !important;
+  }
+}

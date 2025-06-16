@@ -44,16 +44,9 @@ export default function PersonaSelection() {
 			journeyId = uuidv4();
 			localStorage.setItem('journeyId', journeyId);
 		}
-		// Firestore code is commented out for local testing
-		// await addDoc(collection(db, 'personaSelections'), {
-		//   journeyId,
-		//   persona: personaKey,
-		//   createdAt: serverTimestamp(),
-		// });
 		if (typeof window !== 'undefined') {
 			localStorage.setItem('personaType', personaKey);
 		}
-		// Map personaKey to detail page (not form page)
 		let detailPage = '';
 		switch (personaKey) {
 			case 'parent':
@@ -71,14 +64,16 @@ export default function PersonaSelection() {
 			default:
 				detailPage = personaKey;
 		}
-		// Preserve cta param if present
 		const cta = router.query.cta;
 		const query = cta ? `?cta=${encodeURIComponent(cta as string)}` : '';
-		router.push(`/persona/${detailPage}${query}`);
+		const url = `/persona/${detailPage}${query}`;
+		router.push(url).catch(() => {
+			window.location.href = url;
+		});
 	};
 
 	return (
-		<main className="min-h-screen bg-white flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+		<main className="min-h-screen bg-white flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 persona-header-gap">
 			<div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-4xl w-full flex flex-col items-center" style={{ marginTop: '-20px' }}>
 				<h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-[#ef5a63]">
 					Personalize Your Experience

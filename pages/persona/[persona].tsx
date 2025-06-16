@@ -56,19 +56,25 @@ const personaDetails: Record<string, {
 
 export default function PersonaDetail() {
   const router = useRouter();
-  const { persona } = router.query;
-  const details = persona && typeof persona === 'string' ? personaDetails[persona] : null;
+  const [selectedPersona, setSelectedPersona] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    if (details && typeof window !== 'undefined') {
-      localStorage.setItem('personaType', persona as string);
+    if (!router.isReady) return;
+    let personaParam = router.query.persona;
+    if (Array.isArray(personaParam)) personaParam = personaParam[0];
+    if (typeof personaParam === 'string' && personaDetails[personaParam]) {
+      setSelectedPersona(personaParam);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('personaType', personaParam);
+      }
+    } else {
+      setSelectedPersona(null);
     }
-  }, [details, persona]);
+  }, [router.isReady, router.query.persona]);
 
-  // Remove redirect logic. Instead, show detail page with button to proceed.
-  if (!details) {
+  if (!selectedPersona) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] persona-header-gap">
         <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
           <p className="text-lg">Loading...</p>
         </div>
@@ -76,7 +82,8 @@ export default function PersonaDetail() {
     );
   }
 
-  // Map persona to form page
+  const details = personaDetails[selectedPersona];
+
   const getFormPage = (persona: string) => {
     switch (persona) {
       case 'parent':
@@ -93,7 +100,7 @@ export default function PersonaDetail() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6]">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] persona-header-gap">
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
         <h2 className="text-3xl font-bold mb-2 text-[#f75b6a]">Personalize Your Experience</h2>
         <div className="text-5xl mb-2">{details.emoji}</div>
@@ -108,7 +115,7 @@ export default function PersonaDetail() {
         </ul>
         <button
           className="bg-[#f75b6a] text-white font-semibold rounded-full px-8 py-3 shadow-md hover:bg-[#e14b5a] transition mb-2"
-          onClick={() => router.push(getFormPage(persona as string))}
+          onClick={() => selectedPersona && (window.location.href = getFormPage(selectedPersona))}
         >
           See Recommended Courses
         </button>
