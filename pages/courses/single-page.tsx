@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { COURSE_LOGIC } from '../../components/courseLogic';
 import Image from 'next/image';
-import { db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 
 export default function SinglePage() {
@@ -16,23 +14,12 @@ export default function SinglePage() {
       setLoading(true);
       setError('');
       try {
-        // Get journeyId from localStorage
-        const journeyId = typeof window !== 'undefined' ? localStorage.getItem('journeyId') : null;
+        // Always use localStorage for local development
+        const localForm = typeof window !== 'undefined' ? localStorage.getItem('personaFormData') : null;
+        const personaType = typeof window !== 'undefined' ? localStorage.getItem('personaType') : null;
         let data = null;
-        if (journeyId) {
-          // Try Firestore first
-          const docRef = doc(db, 'personaForms', journeyId);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            data = docSnap.data();
-          }
-        }
-        // Fallback: Try localStorage if Firestore fails or no doc
-        if (!data) {
-          const localForm = typeof window !== 'undefined' ? localStorage.getItem('personaFormData') : null;
-          if (localForm) {
-            data = { formData: JSON.parse(localForm), persona: localStorage.getItem('personaType') };
-          }
+        if (localForm) {
+          data = { formData: JSON.parse(localForm), persona: personaType };
         }
         if (!data) {
           localStorage.removeItem('journeyId');

@@ -27,13 +27,8 @@ export default function ParentForm() {
     localStorage.setItem('journeyId', newJourneyId);
     const journeyId = newJourneyId;
     const persona = localStorage.getItem('personaType') || 'parent';
-    const data = {
-      journeyId,
-      persona,
-      formData: form,
-    };
-    // Save form data to localStorage for next page fallback
-    localStorage.setItem('personaFormData', JSON.stringify(data));
+    // Save only the form fields to localStorage for next page fallback
+    localStorage.setItem('personaFormData', JSON.stringify(form));
     router.push('/courses/single-page');
   };
 
