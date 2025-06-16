@@ -500,16 +500,27 @@ section {
     height: auto !important;
   }
 
-  /* Remove negative margins and extra offsets */
-  .mt-[-12px],
-  .-mt-5,
-  .mb-8,
-  .mt-8,
-  .mb-12,
-  .mt-20,
+  /* Remove negative margins and extra offsets - FIXED for Tailwind arbitrary values */
+  .mt-neg-12px {
+    margin-top: -12px !important;
+  }
+  .-mt-5 {
+    margin-top: -1.25rem !important;
+  }
+  .mb-8 {
+    margin-bottom: 2rem !important;
+  }
+  .mt-8 {
+    margin-top: 2rem !important;
+  }
+  .mb-12 {
+    margin-bottom: 3rem !important;
+  }
+  .mt-20 {
+    margin-top: 5rem !important;
+  }
   .mb-20 {
-    margin-top: 0 !important;
-    margin-bottom: 1.2em !important;
+    margin-bottom: 5rem !important;
   }
 
   /* --- Fix: Keep trust avatars in a horizontal row of small circles on mobile --- */
