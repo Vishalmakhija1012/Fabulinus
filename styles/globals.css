@@ -1095,7 +1095,8 @@ section {
   }
   /* Persona forms/pages: force gap between header and first card/container to 4px, with high specificity */
   main.persona-header-gap {
-    margin-top: 4px !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
     outline: 1px dashed #ef5a63 !important; /* Debug: remove after confirming */
   }
   main.persona-header-gap h1 {
@@ -1105,4 +1106,86 @@ section {
   main.persona-header-gap > .persona-main-card {
     margin-top: 0 !important;
   }
+  /* Fix teacher-form page crossing header: match other persona forms */
+  .persona-header-gap {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  main.persona-header-gap {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  .persona-header-gap form {
+    margin-top: 40px !important;
+  }
+}
+
+/* Hide mobile-only titles */
+@media (max-width: 640px) {
+  .mobile-hide-title {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .persona-benefits-list {
+    margin-top: 40px !important;
+  }
+  .persona-benefits-list {
+    margin-bottom: 2rem !important;
+    padding: 0 !important;
+  }
+  .persona-benefits-list li {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 1em !important;
+    margin-bottom: 1.5em !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+  .persona-benefit-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff9e5;
+    color: #f75b6a;
+    font-weight: 700;
+    font-size: 1.15rem;
+    box-shadow: 0 1px 4px 0 rgba(44,62,80,0.06);
+    margin-right: 1em;
+    margin-top: 0.1em;
+    flex-shrink: 0;
+  }
+  .persona-benefit-text {
+    font-size: 1.08rem;
+    color: #23242b;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: left;
+    word-break: break-word;
+  }
+  /* Left align the description above the bullets on persona pages for mobile */
+  .persona-description {
+    text-align: left !important;
+  }
+}
+
+/* Center bullet numbers in all persona and single-page bullets, both mobile and desktop */
+.persona-benefit-number,
+.horizontal-bullets > li > span,
+.horizontal-bullets > li > .persona-benefit-number {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums;
 }

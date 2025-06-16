@@ -33,7 +33,7 @@ export default function PersonalGrowthForm() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-start justify-start bg-[#fafafa] px-0 sm:px-4 py-2 sm:py-8 persona-header-gap pt-14">
+    <main className="min-h-screen flex flex-col items-start justify-start bg-[#fafafa] px-0 sm:px-4 py-2 sm:py-8 persona-header-gap pt-0 sm:pt-14">
       <form
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-lg flex flex-col gap-5 px-2 py-6
@@ -41,7 +41,9 @@ export default function PersonalGrowthForm() {
           translate-y-[-5vh] sm:translate-y-0"
         aria-label="Personal Growth Persona Form"
       >
-        <h1 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Tell us about your personal growth journey</h1>
+        {/* Hide 'Personalize Your Experience' on mobile only */}
+        <h1 className="persona-title mobile-hide-title text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Personalize Your Experience</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Tell us about your teaching journey</h1>
         <label className="font-semibold text-[#23242b]">Years of Experience
           <div className="relative">
             <select

@@ -41,6 +41,8 @@ export default function CollegeForm() {
           translate-y-[-5vh] sm:translate-y-0"
         aria-label="College Student Persona Form"
       >
+        {/* Hide 'Personalize Your Experience' on mobile only */}
+        <h1 className="persona-title mobile-hide-title text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Personalize Your Experience</h1>
         <h1 className="text-2xl md:text-3xl font-bold text-[#ef5a63] mb-2 text-center">Tell us about your college journey</h1>
         <label className="font-semibold text-[#23242b]">Highest Qualification
           <div className="relative">

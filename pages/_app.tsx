@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
         {!isCourses && <NotificationBanner />}
         {/* Always show Header except on /courses pages */}
         {!isCourses && <Header />}
-        <main className="flex-1 pt-24 pb-8 fade-in">
+        <main className="flex-1 pt-14 pb-8 fade-in">
           {isHome ? (
             <Component {...pageProps} />
           ) : (
