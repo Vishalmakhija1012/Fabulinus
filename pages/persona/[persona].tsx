@@ -74,7 +74,7 @@ export default function PersonaDetail() {
 
   if (!selectedPersona) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] persona-header-gap">
+      <main className="min-h-screen flex flex-col items-start justify-start bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] px-0 py-4 sm:items-center sm:justify-center sm:py-8 persona-header-gap">
         <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
           <p className="text-lg">Loading...</p>
         </div>
@@ -100,7 +100,7 @@ export default function PersonaDetail() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] persona-header-gap">
+    <main className="min-h-screen flex flex-col items-start justify-start bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] px-0 py-4 sm:items-center sm:justify-center sm:py-8 persona-header-gap">
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
         <h2 className="text-3xl font-bold mb-2 text-[#f75b6a]">Personalize Your Experience</h2>
         <div className="text-5xl mb-2">{details.emoji}</div>
