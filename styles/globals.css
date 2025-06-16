@@ -1093,4 +1093,16 @@ section {
   .persona-header-gap > .persona-main-card {
     margin-top: 0 !important;
   }
+  /* Persona forms/pages: force gap between header and first card/container to 4px, with high specificity */
+  main.persona-header-gap {
+    margin-top: 4px !important;
+    outline: 1px dashed #ef5a63 !important; /* Debug: remove after confirming */
+  }
+  main.persona-header-gap h1 {
+    margin-bottom: 4px !important;
+  }
+  main.persona-header-gap > form,
+  main.persona-header-gap > .persona-main-card {
+    margin-top: 0 !important;
+  }
 }
