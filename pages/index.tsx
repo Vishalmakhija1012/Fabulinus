@@ -237,7 +237,7 @@ function MobileCTAGroup() {
           <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
           <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
         </div>
-        <span className="text-base text-[#23242b] ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
+        <span className="text-base text-[#23242b] ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000 learners</span>
       </div>
     </div>
   );
@@ -344,7 +344,7 @@ export default function Home() {
                   <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
                   <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
                 </div>
-                <span className="text-base text-gray-500 ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
+                <span className="text-base text-gray-500 ml-2" style={{fontFamily: 'Questrial, sans-serif', fontWeight: 400}}>Trusted by 2,000 learners</span>
               </div>
             </div>
           </div>
@@ -549,7 +549,7 @@ export default function Home() {
                 <Image src="/2.png" alt="Learner avatar 2" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
                 <Image src="/3.png" alt="Learner avatar 3" width={40} height={40} className="rounded-full border-2 border-white bg-white shadow-md object-cover w-10 h-10" />
               </div>
-              <span className="text-base ml-2 text-[#23242b] md:text-white" style={{fontFamily: 'Quesrial, sans-serif', fontWeight: 400}}>Trusted by 2,000k learners</span>
+              <span className="text-base ml-2 text-[#23242b] md:text-white" style={{fontFamily: 'Quesrial, sans-serif', fontWeight: 400}}>Trusted by 2,000 learners</span>
             </div>
           </div>
           {/* Right: Info Cards Stacked Vertically */}
