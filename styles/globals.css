@@ -1097,7 +1097,6 @@ section {
   main.persona-header-gap {
     margin-top: 0 !important;
     padding-top: 0 !important;
-    outline: 1px dashed #ef5a63 !important; /* Debug: remove after confirming */
   }
   main.persona-header-gap h1 {
     margin-bottom: 4px !important;
