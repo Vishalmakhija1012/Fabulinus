@@ -3,32 +3,33 @@ import React from 'react';
 import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
+import { ParentIcon, ProfessionalIcon, CollegeIcon, TeacherIcon } from '../../components/PersonaIcons';
 
 const personas = [
 	{
 		key: 'parent',
-		emoji: '👨‍👩‍👧‍👦',
+		icon: <ParentIcon size={40} />, // replaced emoji
 		title: 'Parent',
 		age: 'For children (4-17 years)', // changed
 		description: 'Help your child build confidence and communication skills for a bright future.',
 	},
 	{
 		key: 'professional',
-		emoji: '💼',
+		icon: <ProfessionalIcon size={40} />, // replaced emoji
 		title: 'Professional',
 		age: 'For working or aspiring adults', // changed
 		description: 'Advance your career with powerful English and communication skills.',
 	},
 	{
 		key: 'college-student',
-		emoji: '🎓',
+		icon: <CollegeIcon size={40} />, // replaced emoji
 		title: 'College Student',
 		age: 'For college & university students', // changed
 		description: 'Stand out in academics and beyond with advanced English skills.',
 	},
 	{
 		key: 'teacher',
-		emoji: '🧑‍🏫',
+		icon: <TeacherIcon size={40} />, // replaced emoji
 		title: 'Teacher',
 		age: 'For educators and teachers',
 		description: 'Empower your students and enhance your teaching journey. Fabulinus supports educators with resources and training.',
@@ -75,9 +76,6 @@ export default function PersonaSelection() {
 	return (
 		<main className="min-h-screen bg-white flex flex-col items-start justify-start py-4 px-4 sm:items-center sm:justify-center sm:py-12 sm:px-6 lg:px-8 persona-header-gap pt-14">
 			<div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-4xl w-full flex flex-col items-center" style={{ marginTop: '-20px' }}>
-				<h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-[#ef5a63]">
-					Personalize Your Experience
-				</h1>
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
 					{personas.map((persona) => (
 						<button
@@ -87,11 +85,8 @@ export default function PersonaSelection() {
 							onClick={() => handleSelect(persona.key)}
 							tabIndex={0}
 						>
-							<span
-								className="text-5xl mb-4"
-								aria-hidden="true"
-							>
-								{persona.emoji}
+							<span className="text-5xl mb-4" aria-hidden="true">
+								{persona.icon}
 							</span>
 							<span className="text-xl font-bold mb-2">
 								{persona.title}

@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/persona/parent-form": "pages/persona/parent-form.js",
-  "/courses/single-page": "pages/courses/single-page.js",
-  "/persona/[persona]": "pages/persona/[persona].js"
+  "/persona": "pages/persona.js",
+  "/persona/[persona]": "pages/persona/[persona].js",
+  "/": "pages/index.js"
 }

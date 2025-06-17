@@ -23,15 +23,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/courses/single-page": [
+    "/persona": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/courses/single-page.js"
+      "static/chunks/pages/persona.js"
     ],
-    "/persona/parent-form": [
+    "/persona/[persona]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/persona/parent-form.js"
+      "static/chunks/pages/persona/[persona].js"
     ]
   },
   "ampFirstPages": []

@@ -1,17 +1,18 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { ParentIcon, ProfessionalIcon, CollegeIcon, TeacherIcon } from '../../components/PersonaIcons';
 
 const personaDetails: Record<string, {
   title: string;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   benefits: string[];
   courseQuery: string;
 }> = {
   parent: {
     title: 'Parent',
-    emoji: '👨‍👩‍👧‍👦',
-    description: 'You want the best for your child. Fabulinus helps children ages 4–14 build confidence, creativity, and communication skills for a bright future.',
+    icon: <ParentIcon size={40} />, // replaced emoji
+    description: 'You want the best for your child. Fabulinus helps children ages 4–17 build confidence, creativity, and communication skills for a bright future.',
     benefits: [
       'Your Goal, Our Custom Plan.',
       'One-on-One Expert Guidance.',
@@ -21,7 +22,7 @@ const personaDetails: Record<string, {
   },
   'professional': {
     title: 'Professional',
-    emoji: '💼',
+    icon: <ProfessionalIcon size={40} />, // replaced emoji
     description: 'Advance your career with powerful English and communication skills. Our courses help you excel in interviews, presentations, and the workplace.',
     benefits: [
       'Your Goal, Our Custom Plan.',
@@ -32,7 +33,7 @@ const personaDetails: Record<string, {
   },
   'college-student': {
     title: 'College Student',
-    emoji: '🎓',
+    icon: <CollegeIcon size={40} />, // replaced emoji
     description: 'Stand out in academics and beyond. Fabulinus helps college & university students (16+) master advanced English and communication skills.',
     benefits: [
       'Your Goal, Our Custom Plan.',
@@ -43,7 +44,7 @@ const personaDetails: Record<string, {
   },
   'teacher': {
     title: 'Teacher',
-    emoji: '🧑‍🏫',
+    icon: <TeacherIcon size={40} />, // replaced emoji
     description: 'Empower your students and enhance your teaching journey. Fabulinus supports educators with resources and training.',
     benefits: [
       'Your Goal, Our Custom Plan.',
@@ -102,20 +103,19 @@ export default function PersonaDetail() {
   return (
     <main className="min-h-screen flex flex-col items-start justify-start bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] px-0 py-4 sm:items-center sm:justify-center sm:py-8 persona-header-gap pt-14">
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
-        <h2 className="text-3xl font-bold mb-2 text-[#f75b6a] mobile-hide-title">Personalize Your Experience</h2>
-        <div className="text-5xl mb-2 persona-emoji-mobile-hide">{details.emoji}</div>
+        <div className="text-5xl mb-2 persona-emoji-mobile-hide">{details.icon}</div>
         <h1 className="text-2xl font-bold mb-2">Welcome, {details.title}!</h1>
         <p className="mb-4 text-gray-700 persona-description">{details.description}</p>
-        <ul className="text-left mb-6 persona-benefits-list horizontal-bullets">
+        <ul className="text-left mb-6 persona-benefits-list horizontal-bullets flex flex-col items-center md:items-start">
           {details.benefits.map((b, i) => (
-            <li key={i} className="flex items-start gap-2 text-base font-normal text-[#23242b]">
+            <li key={i} className="flex items-center gap-4 text-base font-normal text-[#23242b] w-full max-w-xl justify-center md:justify-start">
               <span
-                className="persona-benefit-number flex items-center justify-center font-semibold text-base text-[#f75b6a] w-7 h-7 rounded-full bg-[#fffbe0] shadow"
-                style={{ minWidth: '1.75rem', minHeight: '1.75rem' }}
+                className="persona-benefit-number flex items-center justify-center font-semibold text-base text-[#f75b6a] w-10 h-10 rounded-full bg-[#fffbe0] shadow"
+                style={{ minWidth: '2.5rem', minHeight: '2.5rem', fontWeight: 700, fontSize: '1.3rem' }}
               >
                 {i + 1}
               </span>
-              <span className="flex-1 break-words text-left persona-benefit-text" style={{ lineHeight: 1.5 }}>
+              <span className="flex-1 break-words text-center md:text-left persona-benefit-text font-semibold" style={{ lineHeight: 1.5, fontSize: '1.25rem' }}>
                 {b}
               </span>
             </li>
@@ -136,7 +136,7 @@ export default function PersonaDetail() {
           </a>
         </div>
       </div>
-      {/* Removed empty form that created the anti-shape */}
+      {/* Removed 'Personalize Your Experience' heading as requested */}
     </main>
   );
 }
