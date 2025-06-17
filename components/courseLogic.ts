@@ -31,9 +31,9 @@ export const COURSE_LOGIC = [
     mainLine: "Comprehensive and thorough course strucure focussing on holistic devoplment, communication, and overall personality development",
     oneLine: "Elevate your English to an expert level for academic and professional excellence.",
     bullets: [
-      "Master advanced verbal and written english communication skills. Public speaking",
-      "Achieve fluent, confident communication .",
-      "Develop critical thinking, analysis."
+      "Master advanced verbal and written english communication skills.",
+      "Achieve fluent, confident communication",
+      "Develop critical thinking and analysis."
     ],
     originalPrice: 300000,
     offerPrice: 150000,

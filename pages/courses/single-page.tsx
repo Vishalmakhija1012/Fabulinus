@@ -43,12 +43,19 @@ export default function SinglePage() {
         const foundCourse = COURSE_LOGIC.find(
           c => c.targetAudience === persona && c.courseType === typeOfCourse
         );
-        if (!foundCourse) {
+        // If multiple courses match, pick the one with the correct programName for long term
+        let selectedCourse = foundCourse;
+        if (persona === 'Parents' && typeOfCourse === 'Long Term') {
+          // Prefer programName containing 'Advanced' for long term parent
+          const advanced = COURSE_LOGIC.find(c => c.targetAudience === 'Parents' && c.courseType === 'Long Term' && c.programName.toLowerCase().includes('advanced'));
+          if (advanced) selectedCourse = advanced;
+        }
+        if (!selectedCourse) {
           setError('No course found for your selection.');
           setLoading(false);
           return;
         }
-        setCourse(foundCourse);
+        setCourse(selectedCourse);
         setLoading(false);
       } catch (err) {
         setError('An error occurred while loading your journey.');
@@ -89,28 +96,120 @@ export default function SinglePage() {
       <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between mx-auto py-14 md:py-20 px-4 md:px-16 gap-10 mt-0 move-up-mobile">
         {/* Left: Headline, Description, Labels */}
         <div className="flex-1 flex flex-col items-start justify-center max-w-xl w-full z-10 text-left mx-auto space-y-5">
-          <h1 className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight" style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.03em' }}>
+          <h1 className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight text-left w-full" style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.03em' }}>
             {course.programName}
           </h1>
-          <p className="text-xl md:text-2xl text-[#23242b] font-normal mb-4 mt-1 max-w-2xl opacity-90 leading-snug" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
+          {/* Flipper: Force single horizontal line on all devices, no wrapping, large size, borderless */}
+          <div className="w-full flex justify-start my-2">
+            <div
+              className="flex flex-row items-center bg-transparent rounded-full px-0 py-0 whitespace-nowrap overflow-x-auto"
+              style={{
+                width: 'auto',
+                minWidth: 0,
+                maxWidth: '100%',
+                height: typeof window !== 'undefined' && window.innerWidth < 768 ? '22.5px' : '30px',
+                alignItems: 'center',
+                fontFamily: 'Questrial, Inter, sans-serif',
+                gap: typeof window !== 'undefined' && window.innerWidth < 768 ? '0.35rem' : '0.6rem',
+                justifyContent: 'flex-start',
+                flexWrap: 'nowrap',
+              }}
+            >
+              <button
+                className={`rounded-full transition-all duration-200 focus:outline-none flex-shrink-0 ${course.courseType === 'Short Term' ? 'font-semibold bg-[#ef5a63] text-white' : 'bg-transparent text-[#ef5a63]'} ${typeof window !== 'undefined' && window.innerWidth >= 768 && course.courseType !== 'Short Term' ? 'font-normal' : ''}`}
+                aria-label="Switch to Short Term Course"
+                disabled={course.courseType === 'Short Term'}
+                style={{
+                  minWidth: typeof window !== 'undefined' && window.innerWidth < 768 ? '35px' : '60px',
+                  height: typeof window !== 'undefined' && window.innerWidth < 768 ? '16px' : '24px',
+                  fontWeight: course.courseType === 'Short Term' ? 600 : (typeof window !== 'undefined' && window.innerWidth >= 768 ? 400 : 600),
+                  fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '0.55rem' : (course.courseType === 'Short Term' ? '1.05rem' : '0.84rem'),
+                  padding: typeof window !== 'undefined' && window.innerWidth < 768 ? '0 6px' : '0 14px',
+                  whiteSpace: 'nowrap',
+                }}
+                onClick={() => {
+                  const localForm = typeof window !== 'undefined' ? localStorage.getItem('personaFormData') : null;
+                  if (!localForm) return;
+                  const formData = JSON.parse(localForm);
+                  formData.typeOfCourse = 'short-term';
+                  localStorage.setItem('personaFormData', JSON.stringify(formData));
+                  window.location.reload();
+                }}
+              >
+                short-term
+              </button>
+              <span
+                className="mx-1 font-bold text-[#ef5a63] select-none flex-shrink-0"
+                style={{
+                  fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '0.75rem' : '1.25rem',
+                  fontWeight: 700,
+                  lineHeight: 1,
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                I
+              </span>
+              <button
+                className={`rounded-full transition-all duration-200 focus:outline-none flex-shrink-0 ${course.courseType === 'Long Term' ? 'font-semibold bg-[#ef5a63] text-white' : 'bg-transparent text-[#ef5a63]'} ${typeof window !== 'undefined' && window.innerWidth >= 768 && course.courseType !== 'Long Term' ? 'font-normal' : ''}`}
+                aria-label="Switch to Long Term Course"
+                disabled={course.courseType === 'Long Term'}
+                style={{
+                  minWidth: typeof window !== 'undefined' && window.innerWidth < 768 ? '35px' : '60px',
+                  height: typeof window !== 'undefined' && window.innerWidth < 768 ? '16px' : '24px',
+                  fontWeight: course.courseType === 'Long Term' ? 600 : (typeof window !== 'undefined' && window.innerWidth >= 768 ? 400 : 600),
+                  fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '0.55rem' : (course.courseType === 'Long Term' ? '1.05rem' : '0.84rem'),
+                  padding: typeof window !== 'undefined' && window.innerWidth < 768 ? '0 6px' : '0 14px',
+                  whiteSpace: 'nowrap',
+                }}
+                onClick={() => {
+                  const localForm = typeof window !== 'undefined' ? localStorage.getItem('personaFormData') : null;
+                  if (!localForm) return;
+                  const formData = JSON.parse(localForm);
+                  formData.typeOfCourse = 'long-term';
+                  localStorage.setItem('personaFormData', JSON.stringify(formData));
+                  window.location.reload();
+                }}
+              >
+                long-term
+              </button>
+            </div>
+          </div>
+          <p className="text-base md:text-xl text-[#23242b] font-normal mb-4 mt-1 max-w-2xl opacity-90 leading-snug w-full heading-align" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
             {course.mainLine}
           </p>
           {/* Desktop: Bullets, Early Bird, CTA, etc. */}
-          <ul className="mb-4 pl-0 list-none flex flex-col gap-3 horizontal-bullets">
+          <ul className="mb-4 pl-0 list-none flex flex-col gap-4 horizontal-bullets">
             {course.bullets.map((bullet, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2 text-base md:text-lg text-[#23242b] font-normal"
+                className="flex flex-row items-center w-full"
+                style={{ minHeight: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '3.2rem' }}
               >
                 <span
-                  className="flex-shrink-0 flex items-center justify-center font-semibold text-base md:text-lg text-[#ef5a63] w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#fffbe0] shadow"
-                  style={{ minWidth: '1.75rem', minHeight: '1.75rem' }}
+                  className="flex-shrink-0 flex items-center justify-center font-bold text-[#ef5a63] rounded-full shadow"
+                  style={{
+                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? '2rem' : '2.5rem',
+                    height: typeof window !== 'undefined' && window.innerWidth < 768 ? '2rem' : '2.5rem',
+                    background: '#fffbe0',
+                    fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '1.1rem' : '1.35rem',
+                    boxShadow: '0 2px 8px 0 rgba(239,90,99,0.08)',
+                    minWidth: typeof window !== 'undefined' && window.innerWidth < 768 ? '2rem' : '2.5rem',
+                    minHeight: typeof window !== 'undefined' && window.innerWidth < 768 ? '2rem' : '2.5rem',
+                    textAlign: 'center',
+                  }}
                 >
                   {idx + 1}
                 </span>
                 <span
-                  className="flex-1 break-words text-left"
-                  style={{ lineHeight: 1.5 }}
+                  className="flex-1 font-normal text-[#23242b] bullet-text-align"
+                  style={{
+                    marginLeft: typeof window !== 'undefined' && window.innerWidth < 768 ? '1rem' : '1.5rem',
+                    fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '1rem' : '1.25rem',
+                    lineHeight: 1.5,
+                    display: 'block',
+                  }}
                 >
                   {bullet}
                 </span>
@@ -119,16 +218,29 @@ export default function SinglePage() {
             {/* Early Bird Offer and CTA only for desktop */}
             {/* Remove Early Bird Offer from mobile completely by rendering only on md and up */}
             {typeof window !== 'undefined' && window.innerWidth >= 768 && (
-              <li className="flex items-center gap-3 text-sm md:text-base text-[#23242b] font-normal mt-2">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#fffbe0] border border-[#ffe066] shadow-sm">
-                  <svg width="18" height="18" fill="none" stroke="#ef5a63" strokeWidth="2" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.3 7.3a2 2 0 0 1-2.83 0l-7.3-7.3a2 2 0 0 1 0-2.83l7.3-7.3a2 2 0 0 1 2.83 0l7.3 7.3a2 2 0 0 1 0 2.83z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <li className="flex items-center gap-2 text-sm md:text-base text-[#23242b] font-normal mt-2" style={{fontFamily: 'Questrial, Inter, sans-serif'}}>
+                <span className="flex items-center mr-2" style={{fontWeight: 600, color: '#ef5a63', fontSize: '1rem', letterSpacing: '0.01em'}}>
+                  {/* Offer tag icon */}
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" style={{marginRight: 6, minWidth: 16}}><path d="M20.59 13.41l-7.3 7.3a2 2 0 0 1-2.83 0l-7.3-7.3a2 2 0 0 1 0-2.83l7.3-7.3a2 2 0 0 1 2.83 0l7.3 7.3a2 2 0 0 1 0 2.83z" fill="#ef5a63"/><text x="6.5" y="13.5" fontSize="7" fontWeight="bold" fill="#fff">%</text></svg>
+                  Early Bird Offer
                 </span>
-                <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                  <span className="text-[#ef5a63] font-semibold">Early Bird Offer:</span>
-                  <span>Now <span className="text-[#ef5a63] font-bold text-lg md:text-xl">₹{course.offerPrice.toLocaleString()}</span></span>
-                  <span className="line-through text-[#7b8a99] ml-1 font-normal">₹{course.originalPrice.toLocaleString()}</span>
-                  <span className="bg-[#ef5a63] text-white text-xs font-bold rounded px-2 py-0.5 ml-1 shadow">{Math.round(100 - (course.offerPrice / course.originalPrice) * 100)}% OFF</span>
-                  <span className="text-[#7b8a99] text-sm ml-1">Ends 15 June</span>
+                <span className="flex flex-row items-start gap-2">
+                  <span className="flex flex-col leading-tight" style={{lineHeight: 1.1}}>
+                    <span className="font-normal text-lg md:text-xl" style={{color: '#23242b'}}>
+                      ₹{course.offerPrice.toLocaleString()}
+                    </span>
+                    <span className="line-through text-[#7b8a99] font-normal text-base" style={{marginTop: '-2px'}}>
+                      ₹{course.originalPrice.toLocaleString()}
+                    </span>
+                  </span>
+                  <span className="flex flex-col items-start" style={{alignItems: 'flex-start'}}>
+                    <span className="text-[#ef5a63] text-xs font-bold" style={{background: 'none', border: 'none', padding: 0}}>{Math.round(100 - (course.offerPrice / course.originalPrice) * 100)}% OFF</span>
+                    <span className="flex items-center gap-1 mt-0" style={{background: 'none', border: 'none', padding: 0}}>
+                      <svg width="15" height="15" fill="none" viewBox="0 0 20 20"><rect x="2.5" y="5.5" width="15" height="9" rx="2" fill="#ef5a63"/><rect x="4.5" y="7.5" width="11" height="5" rx="1" fill="#fffbe0"/><rect x="7.5" y="10" width="5" height="1" rx="0.5" fill="#ef5a63"/></svg>
+                      <span className="text-[#ef5a63] text-xs font-medium">EMIs Available</span>
+                    </span>
+                    <span className="text-[#7b8a99] text-xs mt-1 whitespace-nowrap" style={{marginLeft: 0}}>Ends 30 June</span>
+                  </span>
                 </span>
               </li>
             )}
@@ -162,10 +274,25 @@ export default function SinglePage() {
                 style={{ width: '100%', height: '100%' }}
               />
             </div>
-            <div className="live-classes-row mb-2 animate-fade-in-up flex justify-center w-full">
-              <span className="live-dot inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-br from-[#ef5a63] to-[#ffb347] animate-pulse" />
-              <span className="live-text text-[#ef5a63] font-medium text-base md:text-lg" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
+            <div className="live-classes-row mb-2 animate-fade-in-up flex justify-center w-full items-center">
+              <span className="inline-flex items-center justify-center w-4 h-4 md:w-5 md:h-5 rounded-full bg-transparent mr-2 align-middle" style={{ verticalAlign: 'middle' }}>
+                {/* Red alert icon (exclamation in triangle) */}
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                  <path d="M10 3L2 17h16L10 3z" fill="#ef5a63"/>
+                  <rect x="9.1" y="7.5" width="1.8" height="5.2" rx="0.9" fill="#fff"/>
+                  <rect x="9.1" y="14" width="1.8" height="1.8" rx="0.9" fill="#fff"/>
+                </svg>
+              </span>
+              <span className="live-text text-[#ef5a63] font-medium text-base md:text-lg align-middle" style={{ fontFamily: 'Questrial, Inter, sans-serif', verticalAlign: 'middle', display: 'inline-flex', alignItems: 'center' }}>
                 Live Classes by Aparna Mam!
+              </span>
+              <span className="inline-flex items-center justify-center w-4 h-4 md:w-5 md:h-5 rounded-full bg-transparent ml-2 align-middle" style={{ verticalAlign: 'middle' }}>
+                {/* Red alert icon (exclamation in triangle) at end */}
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                  <path d="M10 3L2 17h16L10 3z" fill="#ef5a63"/>
+                  <rect x="9.1" y="7.5" width="1.8" height="5.2" rx="0.9" fill="#fff"/>
+                  <rect x="9.1" y="14" width="1.8" height="1.8" rx="0.9" fill="#fff"/>
+                </svg>
               </span>
             </div>
             {/* Refactored Info Grid */}
@@ -380,6 +507,18 @@ export default function SinglePage() {
             padding-right: 18px !important;
             margin-left: 16px !important;
             margin-right: 16px !important;
+          }
+        }
+      `}</style>
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .bullet-text-align {
+            text-align: left !important;
+            justify-content: flex-start !important;
+            align-items: flex-start !important;
+          }
+          .heading-align {
+            text-align: left !important;
           }
         }
       `}</style>
