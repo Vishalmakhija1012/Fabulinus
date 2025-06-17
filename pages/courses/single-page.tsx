@@ -97,26 +97,49 @@ export default function SinglePage() {
         {/* Left: Headline, Description, Labels */}
         <div className="flex-1 flex flex-col items-start justify-center max-w-xl w-full z-10 text-left mx-auto space-y-5">
           {/* Heading and bullets alignment wrapper */}
-          <div className="w-full pl-10 md:pl-12">
+          <div className="flex flex-col items-start w-full md:w-[140%] max-w-3xl md:max-w-[140%]" style={{ width: '100%' }}>
+            {/* Flipper between Long Term and Short Term */}
+            <div className="flex flex-row items-center gap-3 mb-4 md:w-[140%]">
+              <button
+                className={`px-4 py-2 rounded-full font-semibold border transition-colors duration-150 text-base md:text-lg ${course.courseType === 'Long Term' ? 'bg-[#ef5a63] text-white border-[#ef5a63]' : 'bg-white text-[#ef5a63] border-[#ef5a63]'}`}
+                onClick={() => {
+                  const newCourse = COURSE_LOGIC.find(c => c.targetAudience === course.targetAudience && c.courseType === 'Long Term');
+                  if (newCourse) setCourse(newCourse);
+                }}
+                aria-pressed={course.courseType === 'Long Term'}
+              >
+                Long Term
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full font-semibold border transition-colors duration-150 text-base md:text-lg ${course.courseType === 'Short Term' ? 'bg-[#ef5a63] text-white border-[#ef5a63]' : 'bg-white text-[#ef5a63] border-[#ef5a63]'}`}
+                onClick={() => {
+                  const newCourse = COURSE_LOGIC.find(c => c.targetAudience === course.targetAudience && c.courseType === 'Short Term');
+                  if (newCourse) setCourse(newCourse);
+                }}
+                aria-pressed={course.courseType === 'Short Term'}
+              >
+                Short Term
+              </button>
+            </div>
             <h1
-              className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight text-left w-full min-h-[3.8rem] md:min-h-[5.2rem] flex items-end"
-              style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.03em' }}
+              className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight text-left min-h-[3.8rem] md:min-h-[5.2rem] flex items-end md:w-[180%]"
+              style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.03em', maxWidth: '180%' }}
             >
               {course.programName}
             </h1>
-            <p className="text-base md:text-xl text-[#23242b] font-normal mb-4 mt-1 max-w-2xl opacity-90 leading-snug w-full heading-align" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
+            <p className="text-base md:text-xl text-[#23242b] font-normal mb-4 mt-1 max-w-2xl md:max-w-[110%] opacity-90 leading-snug heading-align" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
               {course.mainLine}
             </p>
             {/* Bullets, Early Bird, CTA, etc. */}
-            <ul className="mb-4 pl-0 list-none flex flex-col gap-4 horizontal-bullets">
+            <ul className="mb-4 list-none flex flex-col gap-4 horizontal-bullets w-full">
               {course.bullets.map((bullet, idx) => (
                 <li
                   key={idx}
-                  className="relative w-full min-h-[2.5rem] md:min-h-[3.2rem]"
+                  className="relative w-full min-h-[2.5rem] md:min-h-[3.2rem] flex items-center"
                 >
                   {/* Number circle absolutely positioned */}
                   <span
-                    className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center font-bold text-[#ef5a63] rounded-full shadow w-8 h-8 md:w-10 md:h-10"
+                    className="flex-shrink-0 flex items-center justify-center font-bold text-[#ef5a63] rounded-full shadow w-8 h-8 md:w-10 md:h-10"
                     style={{
                       background: '#fffbe0',
                       fontSize: '1.1rem',
@@ -126,9 +149,9 @@ export default function SinglePage() {
                   >
                     {idx + 1}
                   </span>
-                  {/* Bullet text, always left-aligned, no marginLeft, padded to match number circle */}
+                  {/* Bullet text, now vertically centered with the number */}
                   <span
-                    className="block font-normal text-[#23242b] bullet-text-align pl-10 md:pl-12"
+                    className="block font-normal text-[#23242b] bullet-text-align pl-4 md:pl-5"
                     style={{ fontSize: '1rem', lineHeight: 1.5, textAlign: 'left' }}
                   >
                     {bullet}
@@ -167,7 +190,7 @@ export default function SinglePage() {
             </ul>
           </div>
           {/* Add 10px space before CTA */}
-          <div className="hidden md:block" style={{ height: 10 }} />
+          <div className="hidden md:block" style={{ height: 4 }} />
           <div className="hidden md:flex w-full flex-col items-start">
             <span className="text-base text-[#23242b] font-medium mb-2" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
               To know more about the course and outcomes
@@ -185,7 +208,7 @@ export default function SinglePage() {
           </div>
         </div>
         {/* Right: Image, Info grid, etc. */}
-        <div className="flex-1 flex flex-col items-center justify-center w-full max-w-lg z-10 mx-auto">
+        <div className="flex-1 flex flex-col items-center justify-center w-full max-w-lg z-10 mx-auto md:ml-[10px] md:mt-[50px]">
           <div className="flex flex-col items-center w-full mb-4 scale-95 md:scale-100" style={{ maxWidth: '420px' }}>
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border border-[#ffe066] shadow-[0_4px_32px_0_rgba(239,90,99,0.10)] overflow-hidden mb-1 flex-shrink-0 self-center" style={{ background: 'radial-gradient(circle at 60% 30%, #fffbe0 70%, #ffe066 100%)' }}>
               <img
@@ -220,7 +243,7 @@ export default function SinglePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mx-auto mt-1">
               {/* Info Card */}
               {/* Live 1-on-1 */}
-              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ffe06633] shadow-sm px-5 py-5 text-center info-card-mobile">
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ef5a63]">
                 <span className="inline-flex items-center justify-center w-12 h-12 text-[#23242b] bg-[#fffbe0] rounded-full shadow mb-2">
                   <svg width="32" height="32" fill="none" stroke="#23242b" strokeWidth="2.2" viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="20" rx="4"/><circle cx="18" cy="24" r="3"/><path d="M30 21h4v6h-4z"/><path d="M12 34h24"/></svg>
                 </span>
@@ -229,7 +252,7 @@ export default function SinglePage() {
                 <div className="text-xs text-[#23242b] mt-1">15 min each | 1/week</div>
               </div>
               {/* Live Batch */}
-              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ffe06633] shadow-sm px-5 py-5 text-center info-card-mobile">
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ef5a63]">
                 <span className="inline-flex items-center justify-center w-12 h-12 text-[#23242b] bg-[#fffbe0] rounded-full shadow mb-2">
                   <svg width="32" height="32" fill="none" stroke="#23242b" strokeWidth="2.2" viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="20" rx="4"/><circle cx="16" cy="24" r="3"/><circle cx="24" cy="24" r="3"/><circle cx="32" cy="24" r="3"/><path d="M12 34h24"/></svg>
                 </span>
@@ -238,7 +261,7 @@ export default function SinglePage() {
                 <div className="text-xs text-[#23242b] mt-1">45 min each | 1/week</div>
               </div>
               {/* Duration */}
-              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ffe06633] shadow-sm px-5 py-5 text-center info-card-mobile duration-mobile h-full">
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ef5a63]">
                 <div className="flex flex-col justify-center items-center h-full w-full">
                   <span className="inline-flex items-center justify-center w-12 h-12 text-[#23242b] bg-[#fffbe0] rounded-full shadow mb-2">
                     <svg width="32" height="32" fill="none" stroke="#23242b" strokeWidth="2.2" viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="31" rx="4"/><path d="M7 18h34M33 6v8M15 6v8M24 24v7h7"/><circle cx="24" cy="28" r="1.5"/></svg>
@@ -248,7 +271,7 @@ export default function SinglePage() {
                 </div>
               </div>
               {/* Batch Size */}
-              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ffe06633] shadow-sm px-5 py-5 text-center info-card-mobile batchsize-mobile h-full">
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-[#ef5a63]">
                 <div className="flex flex-col justify-center items-center h-full w-full">
                   <span className="inline-flex items-center justify-center w-12 h-12 text-[#23242b] bg-[#fffbe0] rounded-full shadow mb-2">
                     <svg width="32" height="32" fill="none" stroke="#23242b" strokeWidth="2.2" viewBox="0 0 48 48">
