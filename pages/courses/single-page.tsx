@@ -510,7 +510,7 @@ export default function SinglePage() {
           }
         }
       `}</style>
-      <style jsx>{`
+      <style>{`
         @media (min-width: 768px) {
           .bullet-text-align {
             text-align: left !important;
