@@ -91,13 +91,12 @@ export default function SinglePage() {
   return (
     <>
       {/* Mobile header, same as index page */}
-      <div className="block md:hidden" style={{ width: '100%', background: '#fff', boxShadow: '0 1px 6px 0 rgba(37,99,235,0.06)', borderRadius: '0.7em', margin: '0 0 1.2em 0', padding: '0.7em 0.5em', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'fixed', top: 0, left: 0, zIndex: 999, height: 52 }}>
+      <div className="block md:hidden" style={{ width: '100%', background: '#fff', boxShadow: '0 1px 6px 0 rgba(37,99,235,0.06)', borderRadius: '0.7em', margin: '0 0 1.2em 0', padding: '0.7em 0.5em', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', position: 'fixed', top: 0, left: 0, zIndex: 999, height: 52 }}>
         <a href="/" aria-label="Fabulinus Home" style={{ display: 'flex', alignItems: 'center', marginRight: '1.2em' }}>
           <img src="/Fabulinus_logo.svg" alt="Fabulinus Logo" style={{ height: 32, width: 'auto', maxHeight: 32, display: 'inline-block', verticalAlign: 'middle' }} />
         </a>
-        <nav style={{ display: 'flex', gap: '1.1em', alignItems: 'center', justifyContent: 'center', width: 'auto' }}>
-          <a href="/" style={{ color: '#23242b', fontWeight: 400, fontSize: '1.08em', textDecoration: 'none', padding: '0.2em 0.7em', borderRadius: '0.5em', background: 'none', transition: 'none' }}>Home</a>
-          <a href="/courses" style={{ color: '#23242b', fontWeight: 400, fontSize: '1.08em', textDecoration: 'none', padding: '0.2em 0.7em', borderRadius: '0.5em', background: 'none', transition: 'none' }}>Courses</a>
+        <nav style={{ display: 'flex', gap: '1.1em', alignItems: 'center', justifyContent: 'flex-start', width: 'auto' }}>
+          <a href="/" style={{ color: '#23242b', fontWeight: 700, fontSize: '1.08em', textDecoration: 'none', padding: '0.2em 0.7em', borderRadius: '0.5em', background: 'none', transition: 'none' }}>Home</a>
         </nav>
       </div>
       <main
