@@ -4,7 +4,7 @@
 export const COURSE_LOGIC = [
   {
     sno: 1,
-    programName: "YOUNG LEARNERS PROGRAM",
+    programName: "YOUNG LEARNERS",
     age: "4-16",
     targetAudience: "Parents",
     courseType: "Short Term",
@@ -28,7 +28,7 @@ export const COURSE_LOGIC = [
     age: "4-16",
     targetAudience: "Parents",
     courseType: "Long Term",
-    mainLine: "Comprehensive and thorough course strucure focussing on holistic devoplment, communication, and overall personality development",
+    mainLine: "Comprehensive course strucure focussing on holistic devoplment, communication, and overall personality development",
     oneLine: "Elevate your English to an expert level for academic and professional excellence.",
     bullets: [
       "Master advanced verbal and written english communication skills.",

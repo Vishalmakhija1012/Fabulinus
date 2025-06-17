@@ -24,6 +24,11 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/courses/single-page.js"
+    ],
+    "/persona/parent-form": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/persona/parent-form.js"
     ]
   },
   "ampFirstPages": []
