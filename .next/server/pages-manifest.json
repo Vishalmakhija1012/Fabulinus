@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/courses/single-page": "pages/courses/single-page.js"
+  "/courses/single-page": "pages/courses/single-page.js",
+  "/persona/teacher-form": "pages/persona/teacher-form.js"
 }
