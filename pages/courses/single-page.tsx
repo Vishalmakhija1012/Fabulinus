@@ -103,7 +103,7 @@ export default function SinglePage() {
         className="min-h-screen flex items-start justify-center px-2 font-sans bg-white rounded-[2.5rem] shadow-lg"
         style={{ marginTop: '0', paddingTop: '72px' }}
       >
-        <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between mx-auto py-14 md:py-20 px-4 md:px-16 gap-10 mt-0 move-up-mobile-cards">
+        <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between mx-auto py-14 md:py-20 px-4 md:px-16 gap-10 mt-0 move-up-mobile-cards mobile-move-up-20 course-content-mobile-moveup course-content-mobile-moveup-30 mobile-move-up-30px">
           {/* Left: Headline, Description, Labels */}
           <div className="flex-1 flex flex-col items-start justify-center max-w-xl w-full z-10 text-left mx-auto space-y-5">
             {/* Mobile-only: Small clean switch button between course name and header */}
@@ -159,12 +159,12 @@ export default function SinglePage() {
                 </button>
               </div>
               <h1
-                className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight text-left min-h-[3.8rem] md:min-h-[5.2rem] flex items-end md:w-[180%]"
+                className="font-extrabold text-4xl md:text-6xl leading-tight mb-2 text-[#ef5a63] tracking-tight text-left min-h-[3.8rem] md:min-h-[5.2rem] flex items-end md:w-[180%] course-name-mobile-moveup"
                 style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '-0.03em', maxWidth: '180%' }}
               >
                 {course.programName}
               </h1>
-              <p className="text-base md:text-xl text-[#23242b] font-normal mb-4 mt-1 max-w-2xl md:max-w-[110%] opacity-90 leading-snug heading-align" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
+              <p className="text-base md:text-xl text-[#23242b] font-normal mb-4 max-w-2xl md:max-w-[110%] opacity-90 leading-snug heading-align program-desc-mobile-gap" style={{ fontFamily: 'Questrial, Inter, sans-serif' }}>
                 {course.mainLine}
               </p>
               {/* Bullets, Early Bird, CTA, etc. */}
@@ -245,9 +245,9 @@ export default function SinglePage() {
             </div>
           </div>
           {/* Right: Image, Info grid, etc. */}
-          <div className="flex-1 flex flex-col items-center justify-center w-full max-w-lg z-10 mx-auto md:ml-[10px] md:mt-[50px]">
+          <div className="flex-1 flex flex-col items-center justify-center w-full max-w-lg z-10 mx-auto md:ml-[10px] md:mt-[50px] mobile-move-up-40px">
             <div className="flex flex-col items-center w-full mb-4 scale-95 md:scale-100" style={{ maxWidth: '420px' }}>
-              <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border border-[#ffe066] shadow-[0_4px_32px_0_rgba(239,90,99,0.10)] overflow-hidden mb-1 flex-shrink-0 self-center" style={{ background: 'radial-gradient(circle at 60% 30%, #fffbe0 70%, #ffe066 100%)' }}>
+              <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border border-[#ffe066] shadow-[0_4px_32px_0_rgba(239,90,99,0.10)] overflow-hidden mb-1 flex-shrink-0 self-center aparna-img-mobile-wrapper" style={{ background: 'radial-gradient(circle at 60% 30%, #fffbe0 70%, #ffe066 100%)' }}>
                 <img
                   src="/Aparna.png"
                   alt="Aparna Mam"
@@ -320,59 +320,64 @@ export default function SinglePage() {
                       </svg>
                     </span>
                     <div className="text-sm font-medium text-[#ef5a63] mb-0.5 text-center">Batch Size</div>
-                    <div className="text-lg font-semibold text-[#23242b] text-center"> Students</div>
+                    <div className="text-lg font-semibold text-[#23242b] text-center">{course.batchSize} Students</div>
                   </div>
                 </div>
-              </div>
-              {/* Mobile-only info line 50px above the 4th label */}
-              <div className="block md:hidden w-full flex items-center justify-center" style={{ marginBottom: '50px' }}>
-                <span style={{ fontFamily: 'Questrial, Inter, sans-serif', fontWeight: 500, fontSize: '1.08rem', color: '#ef5a63', display: 'flex', alignItems: 'center', gap: '0.4em' }}>
-                  To know more, talk
-                  <svg style={{ display: 'inline', margin: '0 0.2em', verticalAlign: 'middle' }} width="20" height="20" fill="none" stroke="#ef5a63" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                  to Aparna Mam!
-                </span>
+                {/* Mobile-only info line: 5px below Batch Size */}
+                <div className="block md:hidden w-full flex items-center justify-center info-line-below-batchsize-mobile" >
+                  <span style={{ fontFamily: 'Questrial, Inter, sans-serif', fontWeight: 500, fontSize: '1.08rem', color: '#ef5a63', display: 'flex', alignItems: 'center', gap: '0.4em' }}>
+                    To know more, talk
+                    <svg style={{ display: 'inline', margin: '0 0.2em', verticalAlign: 'middle' }} width="20" height="20" fill="none" stroke="#ef5a63" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    to Aparna Mam!
+                  </span>
+                </div>
+                {/* Mobile-only CTA button 5px below info line */}
+                <div className="block md:hidden w-full flex items-center justify-center mobile-cta-below-info" style={{ marginTop: 5 }}>
+                  <button
+                    className="bg-[#ef5a63] hover:bg-[#e04a54] text-white font-bold rounded-full px-8 py-3 text-base shadow transition-all duration-200 border-2 border-[#ffe06622]"
+                    style={{ fontFamily: 'Questrial, Inter, sans-serif', letterSpacing: '0.04em', width: '90%', maxWidth: 340 }}
+                    onClick={() => window.location.href = '/courses/book-appointment'}
+                    aria-label="Book Appointment with Aparna Mam"
+                  >
+                    Book Appointment with Aparna Mam
+                  </button>
+                </div>
+                {/* Mobile-only Early Bird Offer block, improved formatting for mobile readability */}
+                <div className="block md:hidden w-full flex items-center justify-center mobile-earlybird-offer-row" style={{ marginTop: 6, marginBottom: 0 }}>
+                  <div className="earlybird-offer-mobile-modern flex flex-row items-center justify-between w-full px-3 py-3 rounded-xl bg-[#fffbe0] border border-[#ffe066] shadow-md"
+                    style={{ maxWidth: 420, minHeight: 0, borderRadius: '1em', padding: '13px 13px 10px 13px', gap: 0 }}>
+                    {/* Offer icon and label */}
+                    <span className="flex items-center gap-2 mr-3">
+                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" style={{marginRight: 4, minWidth: 18}}><path d="M20.59 13.41l-7.3 7.3a2 2 0 0 1-2.83 0l-7.3-7.3a2 2 0 0 1 0-2.83l7.3-7.3a2 2 0 0 1 2.83 0l7.3 7.3a2 2 0 0 1 0 2.83z" fill="#ef5a63"/><text x="6.5" y="13.5" fontSize="8" fontWeight="bold" fill="#fff">%</text></svg>
+                      <span className="font-bold text-[#ef5a63] text-lg" style={{whiteSpace: 'nowrap', letterSpacing: '0.01em'}}>Early Bird Offer</span>
+                    </span>
+                    {/* Price, discount, EMI, end date compacted */}
+                    <span className="flex flex-col items-end min-w-[120px] gap-1">
+                      <span className="flex items-baseline gap-2">
+                        <span className="text-[#23242b] font-extrabold text-xl" style={{fontFamily: 'Questrial, Inter, sans-serif'}}>
+                          ₹{course.offerPrice.toLocaleString()}
+                        </span>
+                        <span className="text-[#ef5a63] font-bold text-base" style={{marginLeft: 2}}>
+                          {Math.round(100 - (course.offerPrice / course.originalPrice) * 100)}% OFF
+                        </span>
+                      </span>
+                      <span className="flex items-center gap-2 mt-0.5">
+                        <span className="line-through text-[#7b8a99] text-base" style={{fontWeight: 500}}>
+                          ₹{course.originalPrice.toLocaleString()}
+                        </span>
+                        <span className="flex items-center gap-1 text-[#ef5a63] text-sm font-medium" style={{marginLeft: 2}}>
+                          <svg width="15" height="15" fill="none" viewBox="0 0 20 20"><rect x="2.5" y="5.5" width="15" height="9" rx="2" fill="#ef5a63"/><rect x="4.5" y="7.5" width="11" height="5" rx="1" fill="#fffbe0"/><rect x="7.5" y="10" width="5" height="1" rx="0.5" fill="#ef5a63"/></svg>
+                          EMIs
+                        </span>
+                        <span className="text-[#7b8a99] text-xs ml-1" style={{fontWeight: 500}}>Ends 30 June</span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Floating logo and tagline at the bottom center (desktop only) */}
-        {/* Only render this block for md and up, never on mobile */}
-        {typeof window !== 'undefined' && window.innerWidth >= 768 && (
-          <div
-            className="hidden md:flex"
-            style={{
-              position: 'fixed',
-              left: '50%',
-              bottom: 24,
-              transform: 'translateX(-50%)',
-              zIndex: 120,
-              borderRadius: '2rem',
-              padding: '0.1rem 0.6rem 0.1rem 0.3rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              border: 'none',
-              boxShadow: 'none',
-              pointerEvents: 'none',
-            }}
-          >
-            <Image src="/Fabulinus_logo.svg" alt="Fabulinus Logo" width={87} height={87} style={{ minWidth: 68, minHeight: 68 }} />
-            <span
-              style={{
-                fontFamily: 'Questrial, Inter, sans-serif',
-                fontWeight: 400,
-                fontSize: '0.98rem',
-                color: '#23242b',
-                letterSpacing: '0.01em',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <span style={{ color: '#ef5a63', fontWeight: 400 }}>Express.</span>{' '}
-              <span style={{ color: '#23242b', fontWeight: 400 }}>Communicate. Dominate</span>
-            </span>
-          </div>
-        )}
         {/* Mobile-only: Set fixed height for mobile only */}
         <style>{`
           @media (max-width: 767px) {
@@ -546,6 +551,62 @@ export default function SinglePage() {
             .mobile-info-text-moveup {
               position: relative;
               top: -40px;
+            }
+          }
+        `}</style>
+        <style>{`
+          @media (max-width: 767px) {
+            .mobile-move-up-20 {
+              position: relative;
+              top: -55px;
+            }
+            .aparna-img-mobile-wrapper {
+              width: 232px !important;
+              height: 232px !important;
+              max-width: 95vw !important;
+              max-height: 95vw !important;
+            }
+            .course-content-mobile-moveup {
+              position: relative;
+              top: -85px;
+            }
+            /* Move all content below the header (including mainLine, bullets, info, and fixed bottom) up by -50px for mobile only */
+            .course-content-mobile-moveup-30 {
+              position: relative;
+              top: -50px;
+            }
+          }
+        `}</style>
+        <style>{`
+          @media (max-width: 767px) {
+            /* Move all content below the header up by 30px for mobile only */
+            .mobile-move-up-30px {
+              position: relative;
+              top: -30px;
+            }
+          }
+        `}</style>
+        <style>{`
+          @media (max-width: 640px) {
+            .program-desc-mobile-gap {
+              margin-top: 5px !important;
+              margin-bottom: 10px !important;
+              padding-top: 0 !important;
+              padding-bottom: 0 !important;
+            }
+            .course-name-mobile-moveup {
+              margin-bottom: 0 !important;
+              padding-bottom: 0 !important;
+            }
+          }
+        `}</style>
+        <style>{`
+          @media (max-width: 640px) {
+            .info-line-below-batchsize-mobile {
+              margin-top: 5px !important;
+            }
+            .mobile-cta-below-info {
+              margin-top: 5px !important;
             }
           }
         `}</style>
