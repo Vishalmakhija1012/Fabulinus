@@ -30,9 +30,9 @@ const personas = [
 	{
 		key: 'teacher',
 		icon: <TeacherIcon size={40} />, // replaced emoji
-		title: 'Teacher',
-		age: 'For educators and teachers',
-		description: 'Empower your students and enhance your teaching journey. Fabulinus supports educators with resources and training.',
+		title: 'Personal Growth', // changed from 'Teacher'
+		age: 'For anyone who wants Personal Growth', // updated from 'For educators and teachers'
+		description: 'Empower yourself and enhance your work/personal journey. with Fabulinus', // updated description
 	},
 ];
 

@@ -45,7 +45,7 @@ const personaDetails: Record<string, {
   'teacher': {
     title: 'Teacher',
     icon: <TeacherIcon size={40} />, // replaced emoji
-    description: 'Empower your students and enhance your teaching journey. Fabulinus supports educators with resources and training.',
+    description: 'Empower yourself and enhance your personal journey. Fabulinus will support you with resources and training.',
     benefits: [
       'Your Goal, Our Custom Plan.',
       'One-on-One Expert Guidance.',
@@ -53,6 +53,14 @@ const personaDetails: Record<string, {
     ],
     courseQuery: 'teacher-profile',
   },
+};
+
+const personaLeadupDescriptions: Record<string, string> = {
+  parent: 'As a parent, you play a crucial role in your child\'s development. Our platform offers tailored resources to help you guide your child towards a successful future.',
+  professional: 'In today\'s competitive job market, strong communication skills are essential. Our courses are designed to help professionals like you excel in every aspect of your career.',
+  'college-student': 'College is a time of growth and opportunity. Stand out by mastering the art of communication and enhancing your English language skills.',
+  teacher: 'Empower yourself and enhance your personal journey. Fabulinus will support you with resources and training.',
+  'personal-growth': 'Empower yourself and enhance your personal journey. Fabulinus will support you with resources and training.',
 };
 
 export default function PersonaDetail() {
@@ -100,11 +108,14 @@ export default function PersonaDetail() {
     }
   };
 
+  // When persona is teacher, set heading to 'Welcome' instead of 'Welcome, Teacher!'
+  const heading = selectedPersona === 'teacher' ? 'Welcome' : `Welcome, ${details.title}!`;
+
   return (
     <main className="min-h-screen flex flex-col items-start justify-start bg-gradient-to-br from-[#f8fafc] to-[#fdf6f6] px-0 py-4 sm:items-center sm:justify-center sm:py-8 persona-header-gap pt-14">
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
         <div className="text-5xl mb-2 persona-emoji-mobile-hide">{details.icon}</div>
-        <h1 className="text-2xl font-bold mb-2">Welcome, {details.title}!</h1>
+        <h1 className="text-2xl font-bold mb-2">{heading}</h1>
         <p className="mb-4 text-[#23242b] persona-description" style={{ fontSize: '1.15rem', fontWeight: 400, textAlign: 'left' }}>{details.description}</p>
         <ul className="text-left mb-6 persona-benefits-list horizontal-bullets flex flex-col items-center md:items-start">
           {details.benefits.map((b, i) => (
