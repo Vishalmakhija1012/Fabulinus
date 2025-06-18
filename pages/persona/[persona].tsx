@@ -105,17 +105,17 @@ export default function PersonaDetail() {
       <div className="bg-white rounded-3xl shadow-xl px-8 py-10 max-w-md w-full text-center">
         <div className="text-5xl mb-2 persona-emoji-mobile-hide">{details.icon}</div>
         <h1 className="text-2xl font-bold mb-2">Welcome, {details.title}!</h1>
-        <p className="mb-4 text-gray-700 persona-description">{details.description}</p>
+        <p className="mb-4 text-[#23242b] persona-description" style={{ fontSize: '1.15rem', fontWeight: 400, textAlign: 'left' }}>{details.description}</p>
         <ul className="text-left mb-6 persona-benefits-list horizontal-bullets flex flex-col items-center md:items-start">
           {details.benefits.map((b, i) => (
-            <li key={i} className="flex items-center gap-4 text-base font-normal text-[#23242b] w-full max-w-xl justify-center md:justify-start">
+            <li key={i} className="flex items-center gap-4 text-base font-normal text-[#23242b] w-full max-w-xl justify-start">
               <span
-                className="persona-benefit-number flex items-center justify-center font-semibold text-base text-[#f75b6a] w-10 h-10 rounded-full bg-[#fffbe0] shadow"
-                style={{ minWidth: '2.5rem', minHeight: '2.5rem', fontWeight: 700, fontSize: '1.3rem' }}
+                className="persona-benefit-number flex items-center justify-center text-base text-[#f75b6a] w-10 h-10 rounded-full bg-[#fffbe0] shadow"
+                style={{ minWidth: '2.5rem', minHeight: '2.5rem', fontWeight: 400, fontSize: '1.15rem' }}
               >
                 {i + 1}
               </span>
-              <span className="flex-1 break-words text-center md:text-left persona-benefit-text font-semibold" style={{ lineHeight: 1.5, fontSize: '1.25rem' }}>
+              <span className="flex-1 break-words persona-benefit-text" style={{ lineHeight: 1.5, fontSize: '1.15rem', textAlign: 'left', fontWeight: 400 }}>
                 {b}
               </span>
             </li>
