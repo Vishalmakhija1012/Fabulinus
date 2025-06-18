@@ -106,6 +106,33 @@ export default function SinglePage() {
         <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between mx-auto py-14 md:py-20 px-4 md:px-16 gap-10 mt-0 move-up-mobile-cards">
           {/* Left: Headline, Description, Labels */}
           <div className="flex-1 flex flex-col items-start justify-center max-w-xl w-full z-10 text-left mx-auto space-y-5">
+            {/* Mobile-only: Small clean switch button between course name and header */}
+            <div className="block md:hidden w-full mb-2" style={{ paddingTop: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.7em', marginTop: '-10px' }}>
+                <button
+                  className={`px-3 py-1 rounded-full font-semibold border text-sm transition-colors duration-150 ${course.courseType === 'Long Term' ? 'bg-[#ef5a63] text-white border-[#ef5a63]' : 'bg-[#e5e7eb] text-[#23242b] border-[#e5e7eb]'}`}
+                  style={{ minWidth: 110, fontWeight: 700, outline: 'none' }}
+                  onClick={() => {
+                    const newCourse = COURSE_LOGIC.find(c => c.targetAudience === course.targetAudience && c.courseType === 'Long Term');
+                    if (newCourse) setCourse(newCourse);
+                  }}
+                  aria-pressed={course.courseType === 'Long Term'}
+                >
+                  Long Term
+                </button>
+                <button
+                  className={`px-3 py-1 rounded-full font-semibold border text-sm transition-colors duration-150 ${course.courseType === 'Short Term' ? 'bg-[#ef5a63] text-white border-[#ef5a63]' : 'bg-[#e5e7eb] text-[#23242b] border-[#e5e7eb]'}`}
+                  style={{ minWidth: 110, fontWeight: 700, outline: 'none' }}
+                  onClick={() => {
+                    const newCourse = COURSE_LOGIC.find(c => c.targetAudience === course.targetAudience && c.courseType === 'Short Term');
+                    if (newCourse) setCourse(newCourse);
+                  }}
+                  aria-pressed={course.courseType === 'Short Term'}
+                >
+                  Short Term
+                </button>
+              </div>
+            </div>
             {/* Heading and bullets alignment wrapper */}
             <div className="flex flex-col items-start w-full md:w-[140%] max-w-3xl md:max-w-[140%]" style={{ width: '100%' }}>
               {/* Flipper between Long Term and Short Term */}
